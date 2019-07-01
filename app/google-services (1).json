@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "478942941077",
+    "firebase_url": "https://hostelhelpbox.firebaseio.com",
+    "project_id": "hostelhelpbox",
+    "storage_bucket": "hostelhelpbox.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478942941077:android:7d2049289f56d6dc",
+        "android_client_info": {
+          "package_name": "Hostel.HelpBox_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478942941077-8ltm8hhf0nqr87pl8tg6h3sl1vcij9nf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLGFNndD0EcTyrr-4S31EuxAlwGr_VFvo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478942941077-8ltm8hhf0nqr87pl8tg6h3sl1vcij9nf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
