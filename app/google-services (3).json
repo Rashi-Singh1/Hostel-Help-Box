@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:478942941077:android:7d2049289f56d6dc",
+        "mobilesdk_app_id": "1:478942941077:android:b36ef246b6135aef",
         "android_client_info": {
-          "package_name": "Hostel.HelpBox_1"
+          "package_name": "com.example.hostelhelpbox"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "478942941077-pmc18nj8vvogmnst0453bru7fc2uvjfn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hostelhelpbox",
+            "certificate_hash": "51b8ee0fe49d40cbc20f0646be800ce4445f2149"
+          }
+        },
         {
           "client_id": "478942941077-8ltm8hhf0nqr87pl8tg6h3sl1vcij9nf.apps.googleusercontent.com",
           "client_type": 3

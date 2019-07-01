@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">HostelHelpBox</string>
+    <string-array name="hostelNames">
+        <item>Select Hostel</item>
+        <item>Barak</item>
+        <item>Brahmaputra</item>
+        <item>Dhansiri</item>
+        <item>Dibang</item>
+        <item>Dihing</item>
+        <item>Kameng</item>
+        <item>Kapili</item>
+        <item>Lohit</item>
+        <item>Manas</item>
+        <item>Married Scholars</item>
+        <item>Siang</item>
+        <item>Subansiri</item>
+        <item>Umiam</item>
+    </string-array>
 </resources>
