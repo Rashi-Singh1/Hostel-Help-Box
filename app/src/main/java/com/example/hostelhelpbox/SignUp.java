@@ -1,6 +1,7 @@
 package com.example.hostelhelpbox;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -92,8 +93,12 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         newUser.setUsername(UserName);
         //reff.push().setValue(Temp);
         ref.child(key).setValue(newUser);
-
-        Toast.makeText(this,"Done!",Toast.LENGTH_SHORT).show();
+        UserInfo.fillUserInfo(UserName,getName,getEMail,getPassw,Hostel,key);
+        Intent intent;
+        intent = new Intent(SignUp.this,home.class);
+//        Toast.makeText(this,"Done!",Toast.LENGTH_SHORT).show();
+        startActivity(intent);
+        finish();
     }
 
     @Override
