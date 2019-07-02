@@ -16,4 +16,6 @@
         <item>Subansiri</item>
         <item>Umiam</item>
     </string-array>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
