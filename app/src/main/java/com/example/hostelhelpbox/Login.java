@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +23,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private EditText Username;
     private EditText Password;
     private Button Submit;
+    private Switch switch1;
+    private SharedPreferenceConfig sharedPreferenceConfig;
+    private Boolean StayLoggedIn;
 
     private ProgressDialog progressDialog;
 
@@ -34,10 +38,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        sharedPreferenceConfig = new SharedPreferenceConfig(getApplicationContext());
+
         Username = findViewById(R.id.username);
         Password = findViewById(R.id.passw);
         Submit = findViewById(R.id.button);
         progressDialog = new ProgressDialog(this);
+        switch1 = findViewById(R.id.switch1);
+        StayLoggedIn = false;
 
         Submit.setOnClickListener(this);
     }
@@ -91,6 +99,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                         intent = new Intent(Login.this,home.class);
                     }
                     startActivity(intent);
+                    if(StayLoggedIn) {
+                        sharedPreferenceConfig.writeLoginStatus(true);
+                        sharedPreferenceConfig.fillUserInfo_Shared(curUser.getFullName(), curUser.getEmail(), curUser.getPasswd(), curUser.getHostel(), curUser.getUsername(), curUser.getUsertype());
+                    }
                     finish();
                 }
                 else{
@@ -111,6 +123,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         if(v == Submit)
         {
+            StayLoggedIn = switch1.isChecked();
             userLogin();
         }
     }

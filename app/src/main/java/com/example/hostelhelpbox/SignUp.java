@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 //import android.widget.ProgressDialog;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,14 +21,19 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     DatabaseReference ref;
+
+    private SharedPreferenceConfig sharedPreferenceConfig;
+
     private Button Submit;
     private EditText Name;
     private EditText Email;
     private EditText Password;
     private ProgressDialog progress;
     private Spinner Hosteldrop;
+    private Switch switch1;
     private String Hostel;
     private String UserName;
+    private Boolean KeepLoggedIn;
 
     public static boolean isAlphaNumeric(String s) {
         return s != null && s.matches("^[a-zA-Z0-9]*$");
@@ -37,12 +43,16 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        sharedPreferenceConfig = new SharedPreferenceConfig(getApplicationContext());
+
 //        firebaseAuth = FirebaseAuth.getInstance();
         Submit = (Button) findViewById(R.id.submit);
         Name = (EditText) findViewById(R.id.name);
         Email = (EditText) findViewById(R.id.email);
         Password = (EditText) findViewById(R.id.passw);
         Hosteldrop = (Spinner) findViewById(R.id.hostel);
+        switch1 = (Switch) findViewById(R.id.switch1);
+        KeepLoggedIn = false;
 
         //putting values in the dropdown list
         ArrayAdapter<String> myAdapter = new ArrayAdapter<>(SignUp.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.hostelNames));
@@ -121,6 +131,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             intent = new Intent(SignUp.this,home.class);
         }
         startActivity(intent);
+        if(KeepLoggedIn){
+            sharedPreferenceConfig.writeLoginStatus(true);
+            sharedPreferenceConfig.fillUserInfo_Shared(newUser.getFullName(),newUser.getEmail(),newUser.getPasswd(),newUser.getHostel(),newUser.getUsername(),newUser.getUsertype());
+        }
+
         finish();
     }
 
@@ -128,6 +143,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         if(v == Submit){
             Hostel = Hosteldrop.getSelectedItem().toString();
+            KeepLoggedIn = switch1.isChecked();
             RegisterUser();
         }
     }

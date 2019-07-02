@@ -71,8 +71,11 @@ public class SecyHome extends AppCompatActivity implements  NavigationView.OnNav
                 break;
 
             case R.id.nav_logout:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAdminLogout()).commit();
-                break;
+                UserInfo.logout();
+//                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+//                startActivity(intent);
+
+                this.finish();
         }
         mDrawLay.closeDrawer(GravityCompat.START);
         return true;

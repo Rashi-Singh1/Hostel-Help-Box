@@ -1,5 +1,8 @@
 package com.example.hostelhelpbox;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -37,6 +40,16 @@ public class AdminHome extends AppCompatActivity implements  NavigationView.OnNa
     }
 
     @Override
+    public void onBackPressed() {
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.mDrawLay);
+        if (mDrawLay.isDrawerOpen(GravityCompat.START)) {
+            mDrawLay.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_account:
@@ -51,8 +64,19 @@ public class AdminHome extends AppCompatActivity implements  NavigationView.OnNa
                 break;
 
             case R.id.nav_logout:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAdminLogout()).commit();
-                break;
+//                SharedPreferences preferences = getSharedPreferences("settings", Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editor = preferences.edit();
+//
+//                editor.putBoolean("logined",false);
+//                editor.apply();
+                UserInfo.logout();
+//                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+//                startActivity(intent);
+
+                this.finish();
+//
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAdminLogout()).commit();
+//                break;
         }
         mDrawLay.closeDrawer(GravityCompat.START);
         return true;

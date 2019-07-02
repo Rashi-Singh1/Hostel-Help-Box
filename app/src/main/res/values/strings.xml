@@ -18,4 +18,12 @@
     </string-array>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="login_preference">com.example.hostelhelpbox_login_preference</string>
+    <string name="login_status_preference">com.example.hostelhelpbox_login_status_preference</string>
+    <string name="username">com.example.hostelhelpbox_username</string>
+    <string name="passw">com.example.hostelhelpbox_passw</string>
+    <string name="fullName">com.example.hostelhelpbox_fullName</string>
+    <string name="email">com.example.hostelhelpbox_email</string>
+    <string name="usertype">com.example.hostelhelpbox_usertype</string>
+    <string name="hostel">com.example.hostelhelpbox_hostel</string>
 </resources>

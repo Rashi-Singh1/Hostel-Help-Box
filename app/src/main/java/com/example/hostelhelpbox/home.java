@@ -14,11 +14,14 @@ public class home extends AppCompatActivity implements  NavigationView.OnNavigat
 
     private DrawerLayout mDrawLay;
     private ActionBarDrawerToggle mToggle;
+    private SharedPreferenceConfig sharedPreferenceConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        sharedPreferenceConfig = new SharedPreferenceConfig(getApplicationContext());
+
         Toast.makeText(this,"Welcome " + UserInfo.fullname,Toast.LENGTH_SHORT).show();
 
         mDrawLay = findViewById(R.id.drawerLayout);
@@ -53,8 +56,11 @@ public class home extends AppCompatActivity implements  NavigationView.OnNavigat
                 break;
 
             case R.id.nav_logout:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAdminLogout()).commit();
-                break;
+                UserInfo.logout();
+//                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+//                startActivity(intent);
+                sharedPreferenceConfig.writeLoginStatus(false);
+                this.finish();
         }
         mDrawLay.closeDrawer(GravityCompat.START);
         return true;
