@@ -10,8 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminHome"></activity>
-        <!-- tools:replace="android:appComponentFactory"> -->
+        <activity android:name=".SecyHome"></activity>
+        <activity android:name=".AdminHome" /> <!-- tools:replace="android:appComponentFactory"> -->
         <activity android:name=".Login" />
         <activity android:name=".home" />
         <activity android:name=".SignUp" />
