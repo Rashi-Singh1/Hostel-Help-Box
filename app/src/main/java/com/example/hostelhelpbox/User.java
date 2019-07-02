@@ -6,6 +6,7 @@ public class User {
     private String passwd;
     private String hostel;
     private String username;
+    private String usertype;
 
     public User() {}
     public String getUsername() {
@@ -42,6 +43,14 @@ public class User {
 
     public String getHostel() {
         return hostel;
+    }
+
+    public String getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
     }
 
     public void setHostel(String hostel) {

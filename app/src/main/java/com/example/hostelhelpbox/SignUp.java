@@ -89,13 +89,21 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
         //to store in the database
         User newUser = new User(getName,getEMail,getPassw,Hostel);
+        newUser.setUsertype("normal");
         newUser.setUsername(UserName);
         ref.child(UserName).setValue(newUser);
 
         //to save info of current user
-        UserInfo.fillUserInfo(UserName,getName,getEMail,getPassw,Hostel);
+        UserInfo.fillUserInfo(UserName,getName,getEMail,getPassw,Hostel,newUser.getUsertype());
         Intent intent;
-        intent = new Intent(SignUp.this,home.class);
+        if(newUser.getUsertype().equals("admin"))
+        {
+            intent = new Intent(SignUp.this,AdminHome.class);
+        }
+        else
+        {
+            intent = new Intent(SignUp.this,home.class);
+        }
         startActivity(intent);
         finish();
     }

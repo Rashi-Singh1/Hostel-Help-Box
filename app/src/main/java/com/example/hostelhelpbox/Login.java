@@ -65,9 +65,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 //                Toast.makeText(getApplicationContext(),"Hey "+ curUser.getFullName(),Toast.LENGTH_SHORT).show();
                 if(curUser.getPasswd().equals(getPasswd))
                 {
-                    UserInfo.fillUserInfo(getUsername,curUser.getFullName(),curUser.getEmail(),getPasswd,curUser.getHostel());
+                    UserInfo.fillUserInfo(getUsername,curUser.getFullName(),curUser.getEmail(),getPasswd,curUser.getHostel(),curUser.getUsertype());
                     Intent intent;
-                    intent = new Intent(Login.this,home.class);
+                    if(curUser.getUsertype().equals("admin"))
+                    {
+                        intent = new Intent(Login.this,AdminHome.class);
+                    }
+                    else
+                    {
+                        intent = new Intent(Login.this,home.class);
+                    }
                     startActivity(intent);
                     finish();
                 }
