@@ -87,16 +87,15 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
         ref = FirebaseDatabase.getInstance().getReference().child("Users");
 
+        //to store in the database
         User newUser = new User(getName,getEMail,getPassw,Hostel);
-        String key = ref.push().getKey();
-        newUser.setKey(key);
         newUser.setUsername(UserName);
-        //reff.push().setValue(Temp);
-        ref.child(key).setValue(newUser);
-        UserInfo.fillUserInfo(UserName,getName,getEMail,getPassw,Hostel,key);
+        ref.child(UserName).setValue(newUser);
+
+        //to save info of current user
+        UserInfo.fillUserInfo(UserName,getName,getEMail,getPassw,Hostel);
         Intent intent;
         intent = new Intent(SignUp.this,home.class);
-//        Toast.makeText(this,"Done!",Toast.LENGTH_SHORT).show();
         startActivity(intent);
         finish();
     }

@@ -9,7 +9,6 @@ public class UserInfo extends AppCompatActivity {
     public static String email;
     public static String passwd;
     public static String hostel;
-    public static String key;
     public static String username;
     private static final UserInfo ourInstance = new UserInfo();
 
@@ -20,13 +19,12 @@ public class UserInfo extends AppCompatActivity {
     private UserInfo() {
     }
 
-    public static void fillUserInfo(String username,String fullname, String email, String passwd, String hostel, String key) {
+    public static void fillUserInfo(String username,String fullname, String email, String passwd, String hostel) {
         UserInfo.username = username;
         UserInfo.fullname = fullname;
         UserInfo.email = email;
         UserInfo.passwd = passwd;
         UserInfo.hostel = hostel;
-        UserInfo.key = key;
     }
 
     public static void logout()
@@ -37,6 +35,5 @@ public class UserInfo extends AppCompatActivity {
         email=null;
         passwd=null;
         hostel=null;
-        key=null;
     }
 }
