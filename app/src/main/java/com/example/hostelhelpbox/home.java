@@ -11,6 +11,6 @@ public class home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toast.makeText(this,"Welcome " + UserInfo.fullname,Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(this,"Your User type is : " + UserInfo.usertype,Toast.LENGTH_SHORT).show();
     }
 }

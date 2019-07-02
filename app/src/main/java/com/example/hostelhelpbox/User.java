@@ -6,6 +6,8 @@ public class User {
     private String passwd;
     private String hostel;
     private String username;
+    private String usertype;
+
 
     public User() {}
     public String getUsername() {
@@ -48,10 +50,19 @@ public class User {
         this.hostel = hostel;
     }
 
-    public User(String fullName, String email, String passwd, String hostel) {
+    public String getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
+    }
+
+    public User(String fullName, String email, String passwd, String hostel, String usertype) {
         this.fullName = fullName;
         this.email = email;
         this.passwd = passwd;
         this.hostel = hostel;
+        this.usertype = usertype;
     }
 }
