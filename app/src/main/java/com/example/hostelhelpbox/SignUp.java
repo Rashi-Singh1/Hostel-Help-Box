@@ -29,6 +29,10 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private String Hostel;
     private String UserName;
 
+    public static boolean isAlphaNumeric(String s) {
+        return s != null && s.matches("^[a-zA-Z0-9]*$");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +75,19 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
         }
 
+        if(getEMail.lastIndexOf('@')!=getEMail.indexOf('@'))
+        {
+            Toast.makeText(getApplicationContext(),"Please enter valid Email Id",Toast.LENGTH_LONG).show();
+            return;
+        }
+
         UserName = getEMail.substring(0,getEMail.lastIndexOf('@'));
+        if(!isAlphaNumeric(UserName))
+        {
+            Toast.makeText(getApplicationContext(),"Please enter valid Email Id",Toast.LENGTH_LONG).show();
+            return;
+        }
+
         if(Hostel.equals("Select Hostel"))
         {
             Toast.makeText(this,"Please choose your hostel",Toast.LENGTH_SHORT).show();

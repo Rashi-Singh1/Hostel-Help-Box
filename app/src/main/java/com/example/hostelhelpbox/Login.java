@@ -24,6 +24,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private Button Submit;
 
     private ProgressDialog progressDialog;
+
+    public static boolean isAlphaNumeric(String s) {
+        return s != null && s.matches("^[a-zA-Z0-9]*$");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +53,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             Toast.makeText(this,"Please enter your Password",Toast.LENGTH_SHORT).show();
             return;
         }
+        if(!isAlphaNumeric(getUsername))
+        {
+            Toast.makeText(getApplicationContext(),"Please enter Username",Toast.LENGTH_LONG).show();
+            return;
+        }
         progressDialog.setMessage("Logging In ...");
         progressDialog.show();
         DatabaseReference ref;
+
+
         ref = FirebaseDatabase.getInstance().getReference("Users/"+getUsername);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -71,8 +83,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     {
                         intent = new Intent(Login.this,AdminHome.class);
                     }
-                    else
+                    else if(curUser.getUsertype().equals("secy"))
                     {
+                        intent = new Intent(Login.this,SecyHome.class);
+                    }
+                    else {
                         intent = new Intent(Login.this,home.class);
                     }
                     startActivity(intent);
