@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,7 +27,8 @@ import java.util.ArrayList;
 public class FragmentDelSecy extends Fragment {
     private ArrayList<User> list;
     private com.example.hostelhelpbox.Adapter Adapter;
-
+    User removedItem;
+    int removedPos;
     public FragmentDelSecy()
     {
 
@@ -104,9 +106,25 @@ public class FragmentDelSecy extends Fragment {
 //            Toast.makeText(getContext(),"index getpositionnnn : "+ Integer.toString(viewHolder.getAdapterPosition()),Toast.LENGTH_SHORT).show();
             DatabaseReference ref;
             ref = FirebaseDatabase.getInstance().getReference("Users/"+list.get(j).getUsername());
+            removedItem = new User(list.get(j).getFullName(),list.get(j).getEmail(),list.get(j).getPasswd(),list.get(j).getHostel(),list.get(j).getSecyOf());
+            removedItem.setUsertype(list.get(j).getUsertype());
+            removedItem.setUsername(list.get(j).getUsername());
+            removedPos = j;
             ref.removeValue();
             list.remove(j);
-//            Adapter.notifyDataSetChanged();
+            Snackbar.make(viewHolder.itemView, removedItem.getUsername()+" deleted",Snackbar.LENGTH_LONG).setAction("UNDO", new MyUndoListener()).show();
+//  Adapter.notifyDataSetChanged();
         }
     };
+
+    class MyUndoListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            DatabaseReference ref;
+            ref = FirebaseDatabase.getInstance().getReference().child("Users");
+            ref.child(removedItem.getUsername()).setValue(removedItem);
+            list.add(removedPos,removedItem);
+            Adapter.notifyDataSetChanged();
+        }
+    }
 }
