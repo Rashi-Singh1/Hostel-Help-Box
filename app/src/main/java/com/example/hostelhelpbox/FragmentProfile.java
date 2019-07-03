@@ -14,7 +14,7 @@ public class FragmentProfile extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Toast.makeText(getContext(),"My profile",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(),"My profile",Toast.LENGTH_SHORT).show();
         View RootView = inflater.inflate(R.layout.fragment_profile, container, false);
         TextView username = RootView.findViewById(R.id.username);
         TextView FullName = (TextView) RootView.findViewById(R.id.fullname);
@@ -23,7 +23,7 @@ public class FragmentProfile extends Fragment {
         TextView Hostel = (TextView) RootView.findViewById(R.id.hostel);
 
         if(UserInfo.username == null) return RootView;
-        Toast.makeText(getContext(),"Welcome2 "+UserInfo.username,Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(),"Welcome2 "+UserInfo.username,Toast.LENGTH_SHORT).show();
         username.setText(UserInfo.username);
         FullName.setText(UserInfo.fullname);
         Email.setText(UserInfo.email);

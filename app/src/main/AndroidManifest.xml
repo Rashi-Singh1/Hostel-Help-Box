@@ -11,17 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SecyHome2"
+            android:label="@string/title_activity_secy_home2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".AdminHome2"
             android:label="@string/title_activity_admin_home2"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".home2"
             android:label="@string/title_activity_home2"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SecyHome" />
-        <activity android:name=".AdminHome" /> <!-- tools:replace="android:appComponentFactory"> -->
+        <!-- tools:replace="android:appComponentFactory"> -->
         <activity android:name=".Login" /> <!-- <activity android:name=".FragmentProfile" /> -->
-        <activity android:name=".home" />
         <activity android:name=".SignUp" />
         <activity android:name=".MainActivity">
             <intent-filter>

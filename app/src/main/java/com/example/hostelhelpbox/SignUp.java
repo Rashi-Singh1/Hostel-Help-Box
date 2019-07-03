@@ -124,11 +124,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         Intent intent;
         if(newUser.getUsertype().equals("admin"))
         {
-            intent = new Intent(SignUp.this,AdminHome.class);
+            intent = new Intent(SignUp.this,AdminHome2.class);
         }
         else
         {
-            intent = new Intent(SignUp.this,home.class);
+            intent = new Intent(SignUp.this,home2.class);
         }
         startActivity(intent);
         if(KeepLoggedIn){

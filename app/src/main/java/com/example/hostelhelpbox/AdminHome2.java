@@ -1,5 +1,6 @@
 package com.example.hostelhelpbox;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,15 +23,6 @@ public class AdminHome2 extends AppCompatActivity
         setContentView(R.layout.activity_admin_home2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -80,13 +72,21 @@ public class AdminHome2 extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_account) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.screen_area, new FragmentProfile()).commit();
+        } else if (id == R.id.nav_AddSecy) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_DeleteSecy) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_logout) {
+            SharedPreferenceConfig sharedPreferenceConfig;
+            sharedPreferenceConfig = new SharedPreferenceConfig(getApplicationContext());
+            UserInfo.logout();
+            sharedPreferenceConfig.writeLoginStatus(false);
+            Intent intent;
+            intent = new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
+            this.finish();
 
         } else if (id == R.id.nav_share) {
 

@@ -89,11 +89,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     Intent intent;
                     if(curUser.getUsertype().equals("admin"))
                     {
-                        intent = new Intent(Login.this,AdminHome.class);
+                        intent = new Intent(Login.this,AdminHome2.class);
                     }
                     else if(curUser.getUsertype().equals("secy"))
                     {
-                        intent = new Intent(Login.this,SecyHome.class);
+                        intent = new Intent(Login.this,SecyHome2.class);
                     }
                     else {
                         intent = new Intent(Login.this,home2.class);
