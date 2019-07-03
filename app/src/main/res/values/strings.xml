@@ -16,6 +16,15 @@
         <item>Subansiri</item>
         <item>Umiam</item>
     </string-array>
+    <string-array name="secyNames">
+        <item>Select Designation</item>
+        <item>General</item>
+        <item>Maintenance</item>
+        <item>Welfare</item>
+        <item>Mess</item>
+        <item>Sports</item>
+        <item>Cultural</item>
+    </string-array>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="login_preference">com.example.hostelhelpbox_login_preference</string>
@@ -25,6 +34,7 @@
     <string name="fullName">com.example.hostelhelpbox_fullName</string>
     <string name="email">com.example.hostelhelpbox_email</string>
     <string name="usertype">com.example.hostelhelpbox_usertype</string>
+    <string name="secyof">com.example.hostelhelpbox_secyof</string>
     <string name="hostel">com.example.hostelhelpbox_hostel</string>
     <string name="title_activity_home2">home2</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

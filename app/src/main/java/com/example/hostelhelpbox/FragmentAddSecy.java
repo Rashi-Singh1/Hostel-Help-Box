@@ -42,6 +42,7 @@ public class FragmentAddSecy extends Fragment {
         EditText Email;
         EditText Password;
         Spinner Hosteldrop;
+        Spinner DesignDrop;
 
         sharedPreferenceConfig = new SharedPreferenceConfig(getContext());
 
@@ -51,17 +52,23 @@ public class FragmentAddSecy extends Fragment {
         Email = (EditText) RootView.findViewById(R.id.email);
         Password = (EditText) RootView.findViewById(R.id.passw);
         Hosteldrop = (Spinner) RootView.findViewById(R.id.hostel);
+        DesignDrop = (Spinner) RootView.findViewById(R.id.designation);
 
 //        //putting values in the dropdown list
         ArrayAdapter<String> myAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.hostelNames));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Hosteldrop.setAdapter(myAdapter);
-        setOnClick(Submit,sharedPreferenceConfig,Name,Email,Password,Hosteldrop, Submit);
+
+        ArrayAdapter<String> myAdapter2 = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.secyNames));
+        myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        DesignDrop.setAdapter(myAdapter2);
+
+        setOnClick(Submit,sharedPreferenceConfig,Name,Email,Password,Hosteldrop, DesignDrop,Submit);
         return RootView;
 //        return inflater.inflate(R.layout.fragment_add_secy, container, false);
     }
 
-    private void RegisterUser(SharedPreferenceConfig sharedPreferenceConfig,EditText Name, EditText Email, EditText Password, String Hostel) {
+    private void RegisterUser(SharedPreferenceConfig sharedPreferenceConfig,EditText Name, EditText Email, EditText Password, String Hostel, String Designation) {
         String UserName;
         String getName = Name.getText().toString().trim();
         String getEMail = Email.getText().toString().trim();
@@ -111,7 +118,7 @@ public class FragmentAddSecy extends Fragment {
         ref = FirebaseDatabase.getInstance().getReference().child("Users");
 
         //to store in the database
-        User newUser = new User(getName, getEMail, getPassw, Hostel);
+        User newUser = new User(getName, getEMail, getPassw, Hostel,Designation);
         newUser.setUsertype("secy");
         newUser.setUsername(UserName);
         ref.child(UserName).setValue(newUser);
@@ -119,32 +126,17 @@ public class FragmentAddSecy extends Fragment {
         Name.setText("");
         Email.setText("");
         Password.setText("");
-//        Fragment frg = null;
-//        frg = getFragmentManager().findFragmentByTag("FragmentAddSecy");
-//        final FragmentTransaction ft = getFragmentManager().beginTransaction();
-//        ft.detach(frg);
-//        ft.attach(frg);
-//        ft.commit();
     }
-//
-//    @Override
-//    public void onClick(View v, SharedPreferenceConfig sharedPreferenceConfig, EditText name, EditText Email, EditText Password, Spinner Hosteldrop, Button Submit) {
-//        if (v == Submit) {
-//            String Hostel;
-//            Hostel = Hosteldrop.getSelectedItem().toString();
-//            RegisterUser(sharedPreferenceConfig,name,Email,Password,Hostel);
-//        }
-//    }
-//    @Override
-
-    private void setOnClick(final Button btn,final SharedPreferenceConfig sharedPreferenceConfig, final EditText name, final EditText Email, final EditText Password, final Spinner Hosteldrop, final Button Submit){
+    private void setOnClick(final Button btn,final SharedPreferenceConfig sharedPreferenceConfig, final EditText name, final EditText Email, final EditText Password, final Spinner Hosteldrop,final Spinner DesignDrop, final Button Submit){
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (v == Submit) {
                     String Hostel;
+                    String Designation;
                     Hostel = Hosteldrop.getSelectedItem().toString();
-                    RegisterUser(sharedPreferenceConfig,name,Email,Password,Hostel);
+                    Designation = DesignDrop.getSelectedItem().toString();
+                    RegisterUser(sharedPreferenceConfig,name,Email,Password,Hostel,Designation);
                     Hosteldrop.setSelection(0);
                     Toast.makeText(getContext(),"New Secy Registered",Toast.LENGTH_SHORT).show();
                 }

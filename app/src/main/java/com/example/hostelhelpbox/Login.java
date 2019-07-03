@@ -85,7 +85,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 //                Toast.makeText(getApplicationContext(),"Hey "+ curUser.getFullName(),Toast.LENGTH_SHORT).show();
                 if(curUser.getPasswd().equals(getPasswd))
                 {
-                    UserInfo.fillUserInfo(getUsername,curUser.getFullName(),curUser.getEmail(),getPasswd,curUser.getHostel(),curUser.getUsertype());
+                    UserInfo.fillUserInfo(getUsername,curUser.getFullName(),curUser.getEmail(),getPasswd,curUser.getHostel(),curUser.getUsertype(),curUser.getSecyOf());
                     Intent intent;
                     if(curUser.getUsertype().equals("admin"))
                     {
@@ -101,7 +101,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     startActivity(intent);
                     if(StayLoggedIn) {
                         sharedPreferenceConfig.writeLoginStatus(true);
-                        sharedPreferenceConfig.fillUserInfo_Shared(curUser.getFullName(), curUser.getEmail(), curUser.getPasswd(), curUser.getHostel(), curUser.getUsername(), curUser.getUsertype());
+                        sharedPreferenceConfig.fillUserInfo_Shared(curUser.getFullName(), curUser.getEmail(), curUser.getPasswd(), curUser.getHostel(), curUser.getUsername(), curUser.getUsertype(),curUser.getSecyOf());
                     }
                     finish();
                 }

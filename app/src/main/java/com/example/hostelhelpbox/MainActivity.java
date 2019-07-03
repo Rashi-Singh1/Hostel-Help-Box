@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(sharedPreferenceConfig.readLoginStatus())
         {
-            UserInfo.fillUserInfo(sharedPreferenceConfig.readusername(),sharedPreferenceConfig.readfullName(),sharedPreferenceConfig.reademail(),sharedPreferenceConfig.readpassw(),sharedPreferenceConfig.readhostel(),sharedPreferenceConfig.readusertype());
+            UserInfo.fillUserInfo(sharedPreferenceConfig.readusername(),sharedPreferenceConfig.readfullName(),sharedPreferenceConfig.reademail(),sharedPreferenceConfig.readpassw(),sharedPreferenceConfig.readhostel(),sharedPreferenceConfig.readusertype(),sharedPreferenceConfig.readsecyof());
             Intent intent;
             if(UserInfo.usertype.equals("normal")) intent = new Intent(getApplicationContext(), home2.class);
             else if(UserInfo.usertype.equals("admin")) intent = new Intent(getApplicationContext(), AdminHome2.class);

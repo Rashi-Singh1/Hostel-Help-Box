@@ -114,13 +114,13 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         ref = FirebaseDatabase.getInstance().getReference().child("Users");
 
         //to store in the database
-        User newUser = new User(getName,getEMail,getPassw,Hostel);
+        User newUser = new User(getName,getEMail,getPassw,Hostel,"none");
         newUser.setUsertype("normal");
         newUser.setUsername(UserName);
         ref.child(UserName).setValue(newUser);
 
         //to save info of current user
-        UserInfo.fillUserInfo(UserName,getName,getEMail,getPassw,Hostel,newUser.getUsertype());
+        UserInfo.fillUserInfo(UserName,getName,getEMail,getPassw,Hostel,newUser.getUsertype(),newUser.getSecyOf());
         Intent intent;
         if(newUser.getUsertype().equals("admin"))
         {
@@ -133,7 +133,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         startActivity(intent);
         if(KeepLoggedIn){
             sharedPreferenceConfig.writeLoginStatus(true);
-            sharedPreferenceConfig.fillUserInfo_Shared(newUser.getFullName(),newUser.getEmail(),newUser.getPasswd(),newUser.getHostel(),newUser.getUsername(),newUser.getUsertype());
+            sharedPreferenceConfig.fillUserInfo_Shared(newUser.getFullName(),newUser.getEmail(),newUser.getPasswd(),newUser.getHostel(),newUser.getUsername(),newUser.getUsertype(),newUser.getSecyOf());
         }
 
         finish();

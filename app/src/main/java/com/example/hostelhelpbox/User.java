@@ -7,6 +7,15 @@ public class User {
     private String hostel;
     private String username;
     private String usertype;
+    private String SecyOf;
+
+    public String getSecyOf() {
+        return SecyOf;
+    }
+
+    public void setSecyOf(String secyOf) {
+        SecyOf = secyOf;
+    }
 
     public User() {}
     public String getUsername() {
@@ -57,10 +66,11 @@ public class User {
         this.hostel = hostel;
     }
 
-    public User(String fullName, String email, String passwd, String hostel) {
+    public User(String fullName, String email, String passwd, String hostel,String SecyOf) {
         this.fullName = fullName;
         this.email = email;
         this.passwd = passwd;
         this.hostel = hostel;
+        this.SecyOf = SecyOf;
     }
 }

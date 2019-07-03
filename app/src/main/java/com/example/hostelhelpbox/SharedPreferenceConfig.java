@@ -27,7 +27,7 @@ public class SharedPreferenceConfig {
          return status;
      }
 
-     public void fillUserInfo_Shared(String fullName, String email, String passw, String hostel, String username, String usertype)
+     public void fillUserInfo_Shared(String fullName, String email, String passw, String hostel, String username, String usertype, String secyof)
      {
          SharedPreferences.Editor editor = sharedPreferences.edit();
          editor.putString(context.getResources().getString(R.string.fullName),fullName);
@@ -36,6 +36,7 @@ public class SharedPreferenceConfig {
          editor.putString(context.getResources().getString(R.string.hostel),hostel);
          editor.putString(context.getResources().getString(R.string.username),username);
          editor.putString(context.getResources().getString(R.string.usertype),usertype);
+         editor.putString(context.getResources().getString(R.string.secyof),secyof);
          editor.commit();
      }
 
@@ -78,6 +79,13 @@ public class SharedPreferenceConfig {
     {
         String name = null;
         name = sharedPreferences.getString(context.getResources().getString(R.string.usertype),null);
+        return name;
+    }
+
+    public String readsecyof()
+    {
+        String name = null;
+        name = sharedPreferences.getString(context.getResources().getString(R.string.secyof),null);
         return name;
     }
 }

@@ -76,6 +76,8 @@ public class AdminHome2 extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.screen_area, new FragmentProfile()).commit();
         } else if (id == R.id.nav_AddSecy) {
             getSupportFragmentManager().beginTransaction().replace(R.id.screen_area, new FragmentAddSecy()).commit();
+        } else if (id == R.id.nav_ViewSecy) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.screen_area, new FragmentViewSecy()).commit();
         } else if (id == R.id.nav_DeleteSecy) {
 
         } else if (id == R.id.nav_logout) {
