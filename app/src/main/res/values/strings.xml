@@ -26,4 +26,12 @@
     <string name="email">com.example.hostelhelpbox_email</string>
     <string name="usertype">com.example.hostelhelpbox_usertype</string>
     <string name="hostel">com.example.hostelhelpbox_hostel</string>
+    <string name="title_activity_home2">home2</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_admin_home2">AdminHome2</string>
 </resources>

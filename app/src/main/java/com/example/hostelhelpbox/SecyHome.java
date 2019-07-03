@@ -33,11 +33,12 @@ public class SecyHome extends AppCompatActivity implements  NavigationView.OnNav
 
     private DrawerLayout mDrawLay;
     private ActionBarDrawerToggle mToggle;
-
+    SharedPreferenceConfig sharedPreferenceConfig;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secy_home);
+        sharedPreferenceConfig = new SharedPreferenceConfig(getApplicationContext());
 
         mDrawLay = findViewById(R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawLay, R.string.open, R.string.close);
@@ -62,19 +63,10 @@ public class SecyHome extends AppCompatActivity implements  NavigationView.OnNav
             case R.id.nav_account:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentProfile()).commit();
                 break;
-            case R.id.nav_AddSecy:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAddSecy()).commit();
-                break;
-
-            case R.id.nav_DeleteSecy:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentDelSecy()).commit();
-                break;
 
             case R.id.nav_logout:
                 UserInfo.logout();
-//                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-//                startActivity(intent);
-
+                sharedPreferenceConfig.writeLoginStatus(false);
                 this.finish();
         }
         mDrawLay.closeDrawer(GravityCompat.START);

@@ -1,5 +1,6 @@
 package com.example.hostelhelpbox;
 
+        import android.content.Intent;
         import android.support.annotation.NonNull;
         import android.support.design.widget.NavigationView;
         import android.support.v4.view.GravityCompat;
@@ -8,6 +9,8 @@ package com.example.hostelhelpbox;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
         import android.view.MenuItem;
+        import android.view.View;
+        import android.widget.TextView;
         import android.widget.Toast;
 
 public class home extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
@@ -43,22 +46,23 @@ public class home extends AppCompatActivity implements  NavigationView.OnNavigat
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
         switch (menuItem.getItemId()) {
             case R.id.nav_account:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentProfile()).commit();
-                break;
-            case R.id.nav_AddSecy:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAddSecy()).commit();
-                break;
-
-            case R.id.nav_DeleteSecy:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentDelSecy()).commit();
+//                Intent intent;
+//                intent = new Intent(getApplicationContext(),FragmentProfile.class);
+//                startActivity(intent);
+//                View RootView = inflater.inflate(R.layout.fragment_blank, container, false);
+//
+//                TextView tv = (TextView)RootView.findViewById(R.id.fragmentText);
+//                tv.setText("HI");
+//
+//                return RootView;
+                getSupportFragmentManager().beginTransaction().replace(R.id.screen_area, new FragmentProfile()).commit();
                 break;
 
             case R.id.nav_logout:
                 UserInfo.logout();
-//                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-//                startActivity(intent);
                 sharedPreferenceConfig.writeLoginStatus(false);
                 this.finish();
         }

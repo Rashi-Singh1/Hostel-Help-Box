@@ -20,7 +20,12 @@
             android:textAlignment="center"
             android:textSize="24dp"/>
     </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:id="@+id/screen_area"
+        android:layout_height="match_parent">
 
+    </FrameLayout>
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

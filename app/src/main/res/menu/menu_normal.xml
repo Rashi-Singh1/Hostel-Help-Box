@@ -5,13 +5,17 @@
         android:icon="@mipmap/profile"
         android:title="My Account" />
 
-    <item android:id="@+id/nav_AddSecy"
-        android:icon="@mipmap/add"
-        android:title="Register Secy" />
+    <item android:id="@+id/nav_maintenance"
+        android:icon="@mipmap/logout"
+        android:title="Maintenance" />
 
-    <item android:id="@+id/nav_DeleteSecy"
-        android:icon="@mipmap/del"
-        android:title="Delete Secy" />
+    <item android:id="@+id/nav_mess_canteen_juice"
+        android:icon="@mipmap/logout"
+        android:title="Mess/Canteen/Juice Center" />
+
+    <item android:id="@+id/nav_imp_contacts"
+        android:icon="@mipmap/logout"
+        android:title="Important Contacts" />
 
     <item android:id="@+id/nav_logout"
         android:icon="@mipmap/logout"

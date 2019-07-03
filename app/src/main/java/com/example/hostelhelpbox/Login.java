@@ -96,7 +96,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                         intent = new Intent(Login.this,SecyHome.class);
                     }
                     else {
-                        intent = new Intent(Login.this,home.class);
+                        intent = new Intent(Login.this,home2.class);
                     }
                     startActivity(intent);
                     if(StayLoggedIn) {

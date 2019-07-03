@@ -16,11 +16,13 @@ public class AdminHome extends AppCompatActivity implements  NavigationView.OnNa
 
     private DrawerLayout mDrawLay;
     private ActionBarDrawerToggle mToggle;
+    SharedPreferenceConfig sharedPreferenceConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
+        sharedPreferenceConfig = new SharedPreferenceConfig(getApplicationContext());
 
         mDrawLay = findViewById(R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawLay, R.string.open, R.string.close);
@@ -64,19 +66,10 @@ public class AdminHome extends AppCompatActivity implements  NavigationView.OnNa
                 break;
 
             case R.id.nav_logout:
-//                SharedPreferences preferences = getSharedPreferences("settings", Context.MODE_PRIVATE);
-//                SharedPreferences.Editor editor = preferences.edit();
-//
-//                editor.putBoolean("logined",false);
-//                editor.apply();
                 UserInfo.logout();
-//                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-//                startActivity(intent);
+                sharedPreferenceConfig.writeLoginStatus(false);
 
                 this.finish();
-//
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAdminLogout()).commit();
-//                break;
         }
         mDrawLay.closeDrawer(GravityCompat.START);
         return true;
