@@ -11,4 +11,13 @@
     <color name="colorAccent">#FF4081</color>
     <color name="darkGrey">#A9A9A9</color>
     <color name="goodGrey">#2F4F4F</color>
+    <color name="redwood">#A45A52</color>
+    <color name="indianred">#CD5C5C</color>
+    <color name="imperialred">#ED2939</color>
+    <color name="barnRed">#7C0A02</color>
+    <color name="salmon">#FA8072</color>
+    <color name="carmine">#800000</color>
+    <color name="raspberry">#D21F3C</color>
+    <color name="rust">#933A16</color>
+
 </resources>
