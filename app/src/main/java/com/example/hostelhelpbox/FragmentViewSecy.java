@@ -52,7 +52,10 @@ public class FragmentViewSecy extends Fragment {
                 for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
                     User p = dataSnapshot1.getValue(User.class);
-                    list.add(p);
+                    if(p!=null && p.getUsertype().equals("secy"))
+                    {
+                        list.add(p);
+                    }
                 }
                 if(list.size()!=0)
                 {

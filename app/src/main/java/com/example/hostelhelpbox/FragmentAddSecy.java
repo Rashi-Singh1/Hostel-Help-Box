@@ -138,6 +138,7 @@ public class FragmentAddSecy extends Fragment {
                     Designation = DesignDrop.getSelectedItem().toString();
                     RegisterUser(sharedPreferenceConfig,name,Email,Password,Hostel,Designation);
                     Hosteldrop.setSelection(0);
+                    DesignDrop.setSelection(0);
                     Toast.makeText(getContext(),"New Secy Registered",Toast.LENGTH_SHORT).show();
                 }
 

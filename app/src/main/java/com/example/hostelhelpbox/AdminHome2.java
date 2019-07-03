@@ -79,6 +79,7 @@ public class AdminHome2 extends AppCompatActivity
         } else if (id == R.id.nav_ViewSecy) {
             getSupportFragmentManager().beginTransaction().replace(R.id.screen_area, new FragmentViewSecy()).commit();
         } else if (id == R.id.nav_DeleteSecy) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.screen_area, new FragmentDelSecy()).commit();
 
         } else if (id == R.id.nav_logout) {
             SharedPreferenceConfig sharedPreferenceConfig;
