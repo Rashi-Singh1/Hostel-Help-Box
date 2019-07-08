@@ -93,8 +93,8 @@ public class AdminHome2 extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
-
+        }  else if (id == R.id.nav_message) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.screen_area, new FragmentViewMessage()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
