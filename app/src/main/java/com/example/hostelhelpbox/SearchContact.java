@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchContact extends AppCompatActivity {
+public class SearchContact extends AppCompatActivity{
 
     ArrayList<User> list;
     DatabaseReference ref;
@@ -37,46 +37,37 @@ public class SearchContact extends AppCompatActivity {
     AdapterSearchContact Adapter;
     TextView title, endpage;
 //    EditText search;
+    SharedPreferenceConfig sharedPreferenceConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_contact);
-
-        //Toast.makeText(getApplicationContext(),"loading or not",Toast.LENGTH_LONG).show();
+        sharedPreferenceConfig = new SharedPreferenceConfig(this);
 
         title = findViewById(R.id.title);
         endpage = findViewById(R.id.endpage);
-//        search = findViewById(R.id.search);
         viewFeedback = findViewById(R.id.viewFeedback);
         viewFeedback.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
-//        search.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
-//                Adapter.getFilter().filter(s);
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
-
         ref = FirebaseDatabase.getInstance().getReference().child("Users");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                int i = 0;
+                list.clear();
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
                     User p = dataSnapshot1.getValue(User.class);
-                    list.add(p);
+                    if(list.isEmpty())
+                    {
+                        list.add(p);
+                    }
+                    else {
+
+                        if (!(sharedPreferenceConfig.readusername().equals(p.getUsername())) && !(p.getUsertype().equals("admin")))
+                            list.add(p);
+
+                    }
                 }
                 if (list.size() != 0)
                 {
@@ -114,4 +105,5 @@ public class SearchContact extends AppCompatActivity {
         });
         return true;
     }
+
 }

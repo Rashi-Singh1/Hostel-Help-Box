@@ -1,6 +1,8 @@
 package com.example.hostelhelpbox;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,7 +41,20 @@ public class AdapterSearchContact extends RecyclerView.Adapter<AdapterSearchCont
         {
         }
         else viewHolder.secyof.setText(mytodos.get(i).getSecyOf());
+        final String username = mytodos.get(i).getUsername();
+        final String full = mytodos.get(i).getFullName();
 
+        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,View_Message_Conversation.class);
+                intent.putExtra("receiverUsername", username);
+                intent.putExtra("receiverFullname", full);
+                context.startActivity(intent);
+//                context.overridePendingTransition(0, 0);
+//                ((Activity)context).finish();
+            }
+        });
     }
 
     @Override
@@ -48,6 +65,7 @@ public class AdapterSearchContact extends RecyclerView.Adapter<AdapterSearchCont
     class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView fullname,email,hostel,secyof;
+        LinearLayout parentLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,6 +73,7 @@ public class AdapterSearchContact extends RecyclerView.Adapter<AdapterSearchCont
             email = (TextView) itemView.findViewById(R.id.email);
             hostel = (TextView) itemView.findViewById(R.id.hostel);
             secyof = (TextView) itemView.findViewById(R.id.secyof);
+            parentLayout = itemView.findViewById(R.id.parentLayout);
         }
     }
 

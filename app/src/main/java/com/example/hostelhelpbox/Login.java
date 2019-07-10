@@ -98,11 +98,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     else {
                         intent = new Intent(Login.this,home2.class);
                     }
-                    startActivity(intent);
+                    sharedPreferenceConfig.fillUserInfo_Shared(curUser.getFullName(), curUser.getEmail(), curUser.getPasswd(), curUser.getHostel(), curUser.getUsername(), curUser.getUsertype(),curUser.getSecyOf());
                     if(StayLoggedIn) {
                         sharedPreferenceConfig.writeLoginStatus(true);
-                        sharedPreferenceConfig.fillUserInfo_Shared(curUser.getFullName(), curUser.getEmail(), curUser.getPasswd(), curUser.getHostel(), curUser.getUsername(), curUser.getUsertype(),curUser.getSecyOf());
                     }
+                    startActivity(intent);
                     finish();
                 }
                 else{

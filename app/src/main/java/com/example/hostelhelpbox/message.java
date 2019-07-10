@@ -12,14 +12,11 @@ public class message {
     private String key;
     public message(){ }
 
-    public message(String sender, String receiver, String subject, String body, String date, String time, String key) {
+    public message(String sender, String receiver, String subject, String body) {
         this.sender = sender;
         this.receiver = receiver;
         this.subject = subject;
         this.body = body;
-        this.date = date;
-        this.time = time;
-        this.key = key;
     }
 
     public String getSender() {

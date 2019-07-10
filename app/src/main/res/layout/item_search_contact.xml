@@ -36,7 +36,7 @@ app:layout_constraintCircleRadius="12dp">
         app:contentPadding="10dp">
 
         <LinearLayout
-            android:id="@+id/rl_layout_card"
+            android:id="@+id/parentLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">

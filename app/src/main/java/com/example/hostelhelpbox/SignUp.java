@@ -130,11 +130,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         {
             intent = new Intent(SignUp.this,home2.class);
         }
-        startActivity(intent);
+        sharedPreferenceConfig.fillUserInfo_Shared(newUser.getFullName(),newUser.getEmail(),newUser.getPasswd(),newUser.getHostel(),newUser.getUsername(),newUser.getUsertype(),newUser.getSecyOf());
         if(KeepLoggedIn){
             sharedPreferenceConfig.writeLoginStatus(true);
-            sharedPreferenceConfig.fillUserInfo_Shared(newUser.getFullName(),newUser.getEmail(),newUser.getPasswd(),newUser.getHostel(),newUser.getUsername(),newUser.getUsertype(),newUser.getSecyOf());
         }
+        startActivity(intent);
 
         finish();
     }

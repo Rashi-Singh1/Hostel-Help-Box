@@ -23,7 +23,7 @@ public class AdapterViewConversation extends RecyclerView.Adapter<AdapterViewCon
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_message, viewGroup, false));
+        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_conversation_message, viewGroup, false));
     }
 
     public void onBindViewHolder(@NonNull MyViewHolder viewHolder, int i) {
