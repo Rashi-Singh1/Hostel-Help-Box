@@ -83,9 +83,12 @@ public class home2 extends AppCompatActivity
         int id = item.getItemId();
         if (id == R.id.nav_account) {
             getSupportFragmentManager().beginTransaction().replace(R.id.screen_area, new FragmentProfile()).commit();
-        } else if (id == R.id.nav_maintenance) {
-
-        } else if (id == R.id.nav_mess_canteen_juice) {
+        } else if (id == R.id.nav_complaint) {
+            Intent intent;
+            intent = new Intent(getApplicationContext(),Complaint.class);
+            startActivity(intent);
+            this.finish();
+        } else if (id == R.id.nav_hostel_utilities) {
 
         } else if (id == R.id.nav_imp_contacts) {
 

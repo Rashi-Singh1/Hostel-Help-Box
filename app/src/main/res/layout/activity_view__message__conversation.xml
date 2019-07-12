@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e6e6e6"
+    android:background="#FFF"
     tools:context=".View_Message_Conversation">
 
     <android.support.design.widget.AppBarLayout
@@ -54,6 +54,7 @@
         android:layout_marginLeft="5dp"
         app:cardCornerRadius="25dp"
         app:cardElevation="2dp"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:layout_alignParentBottom="true">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -63,6 +64,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="15dp"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:layout_marginRight="15dp"
             >
             <LinearLayout
@@ -78,7 +80,8 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:hint="Type message subject : "
-                    android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/white"
+                    android:textColor="@android:color/white"
                     android:background="@android:color/transparent"
                     android:layout_marginBottom="5dp"
                     android:textSize="18sp" />
@@ -97,6 +100,8 @@
                             android:layout_height="wrap_content"
                             android:hint="Type a message ..."
                             android:text=""
+                            android:textColorHint="@android:color/white"
+                            android:textColor="@android:color/white"
                             android:textSize="16sp"
                             android:background="@android:color/transparent"/>
                     </LinearLayout>

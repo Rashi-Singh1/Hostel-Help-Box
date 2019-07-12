@@ -27,7 +27,7 @@ public class AdapterViewConversation extends RecyclerView.Adapter<AdapterViewCon
     }
 
     public void onBindViewHolder(@NonNull MyViewHolder viewHolder, int i) {
-        viewHolder.datetime.setText(mytodos.get(i).getDate() + mytodos.get(i).getTime());
+        viewHolder.datetime.setText(mytodos.get(i).getDate() + " " + mytodos.get(i).getTime());
         viewHolder.body.setText(mytodos.get(i).getBody());
         viewHolder.subject.setText(mytodos.get(i).getSubject());
     }

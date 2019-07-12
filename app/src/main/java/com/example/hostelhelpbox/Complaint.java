@@ -1,6 +1,5 @@
 package com.example.hostelhelpbox;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,24 +13,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class SecyHome2 extends AppCompatActivity
+public class Complaint extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_secy_home2);
+        setContentView(R.layout.activity_complaint);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -56,7 +55,7 @@ public class SecyHome2 extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.secy_home2, menu);
+        getMenuInflater().inflate(R.menu.complaint, menu);
         return true;
     }
 
@@ -81,30 +80,18 @@ public class SecyHome2 extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_account) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.screen_area, new FragmentProfile()).commit();
-        } else if (id == R.id.nav_complaint) {
-            Intent intent;
-            intent = new Intent(getApplicationContext(),Complaint.class);
-            startActivity(intent);
-            this.finish();
-        } else if (id == R.id.nav_hostel_utilities) {
+        if (id == R.id.nav_cultural) {
+            // Handle the camera action
+        } else if (id == R.id.nav_maintenance) {
 
-        } else if (id == R.id.nav_imp_contacts) {
+        } else if (id == R.id.nav_mess) {
 
-        } else if (id == R.id.nav_logout) {
-            SharedPreferenceConfig sharedPreferenceConfig;
-            sharedPreferenceConfig = new SharedPreferenceConfig(getApplicationContext());
-            UserInfo.logout();
-            sharedPreferenceConfig.writeLoginStatus(false);
-            Intent intent;
-            intent = new Intent(getApplicationContext(),MainActivity.class);
-            startActivity(intent);
-            this.finish();
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_sports) {
 
-        } else if (id == R.id.nav_message) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.screen_area, new FragmentViewMessage()).commit();
+        } else if (id == R.id.nav_technical) {
+
+        } else if (id == R.id.nav_welfare) {
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

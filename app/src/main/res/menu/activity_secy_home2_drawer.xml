@@ -8,13 +8,13 @@
             android:icon="@mipmap/profile"
             android:title="My Account" />
 
-        <item android:id="@+id/nav_maintenance"
+        <item android:id="@+id/nav_complaint"
             android:icon="@mipmap/logout"
-            android:title="Maintenance" />
+            android:title="Complaint/Suggestion Box" />
 
-        <item android:id="@+id/nav_mess_canteen_juice"
+        <item android:id="@+id/nav_hostel_utilities"
             android:icon="@mipmap/logout"
-            android:title="Mess/Canteen/Juice Center" />
+            android:title="Hostel Utilities" />
 
         <item android:id="@+id/nav_imp_contacts"
             android:icon="@mipmap/logout"
