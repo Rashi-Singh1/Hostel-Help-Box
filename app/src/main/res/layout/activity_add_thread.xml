@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp"
+    tools:context=".AddThread">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/theme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/rounded_edittext"
+                    android:hint="Theme"
+                    android:maxLength="250"
+                    android:padding="8dp"
+                    android:backgroundTint="#BEBEBE"
+                    android:textSize="16sp" />
+                <EditText
+                    android:id="@+id/secy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/rounded_edittext"
+                    android:hint="Concerned Authority"
+                    android:layout_marginTop="7dp"
+                    android:enabled="false"
+                    android:maxLength="250"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
+
+
+                <EditText
+                    android:id="@+id/subject"
+                    android:padding="8dp"
+                    android:background="@drawable/rounded_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_marginTop="7dp"
+                    android:maxLength="250"
+                    android:hint="Subject"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/rounded_edittext">
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/body"
+                        android:layout_width="match_parent"
+                        android:padding="8dp"
+                        android:maxLength="700"
+                        android:hint="Additional Information ... "
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp" />
+
+                </ScrollView>
+
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+                <Switch
+                    android:id="@+id/urgent"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:textColor="#FF0000"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="wrap_content"
+                    android:text="Mark Urgent   " />
+
+                <Button
+                    android:id="@+id/submit"
+                    android:layout_width="150dp"
+                    android:layout_below="@+id/urgent"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="#FFF"
+                    android:textAllCaps="false"
+                    android:textSize="17sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="Submit" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

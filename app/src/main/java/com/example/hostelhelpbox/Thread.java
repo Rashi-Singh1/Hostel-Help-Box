@@ -8,6 +8,8 @@ public class Thread {
     private String creator;
     private String theme;       //like maintenance
     private ArrayList<User> likes;
+    private String date;
+    private String time;
     private boolean imp;
     private boolean solved;
     private boolean acknowledged;
@@ -15,17 +17,69 @@ public class Thread {
     private ArrayList<Comment> comments;
     private String subject;
     private String body;
+    private String hostel;
+
+    private String expectedTime;
     private ArrayList<User> cc;
     //attachment
 
     public Thread(){}
-    public Thread(String secy, String creator, String theme, String subject, String body, ArrayList<User> cc) {
+    public Thread(String secy, String creator, String theme, String subject, String body, String date, String time,boolean imp,String hostel) {
         this.secy = secy;
         this.creator = creator;
         this.theme = theme;
         this.subject = subject;
         this.body = body;
-        this.cc = cc;
+        this.date = date;
+        this.time = time;
+        this.imp = imp;
+        this.solved = false;
+        this.acknowledged = false;
+        this.likes = new ArrayList<>();
+        this.comments = new ArrayList<>();
+        this.rating = 0;
+        this.hostel = hostel;
+    }
+
+
+    public String getHostel() {
+        return hostel;
+    }
+
+    public void setHostel(String hostel) {
+        this.hostel = hostel;
+    }
+
+    public String getExpectedTime() {
+        return expectedTime;
+    }
+
+    public void setExpectedTime(String expectedTime) {
+        this.expectedTime = expectedTime;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getSecy() {
@@ -44,11 +98,11 @@ public class Thread {
         this.creator = creator;
     }
 
-    public String getTheme() {
+    public String gettheme() {
         return theme;
     }
 
-    public void setTheme(String topic) {
+    public void settheme(String topic) {
         this.theme = topic;
     }
 
@@ -100,11 +154,11 @@ public class Thread {
         this.comments = comments;
     }
 
-    public String getSubject() {
+    public String getsubject() {
         return subject;
     }
 
-    public void setSubject(String subject) {
+    public void setsubject(String subject) {
         this.subject = subject;
     }
 

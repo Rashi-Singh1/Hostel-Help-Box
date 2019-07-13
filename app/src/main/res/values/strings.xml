@@ -46,4 +46,5 @@
     <string name="title_activity_admin_home2">AdminHome2</string>
     <string name="title_activity_secy_home2">SecyHome2</string>
     <string name="title_activity_complaint">Complaint</string>
+    <string name="title_activity_complaint_secy">ComplaintSecy</string>
 </resources>

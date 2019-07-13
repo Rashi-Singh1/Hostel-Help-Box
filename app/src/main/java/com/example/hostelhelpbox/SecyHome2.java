@@ -85,9 +85,8 @@ public class SecyHome2 extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.screen_area, new FragmentProfile()).commit();
         } else if (id == R.id.nav_complaint) {
             Intent intent;
-            intent = new Intent(getApplicationContext(),Complaint.class);
+            intent = new Intent(getApplicationContext(),ComplaintSecy.class);
             startActivity(intent);
-            this.finish();
         } else if (id == R.id.nav_hostel_utilities) {
 
         } else if (id == R.id.nav_imp_contacts) {

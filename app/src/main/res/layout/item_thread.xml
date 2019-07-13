@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#FFF"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/transparent"
     android:orientation="horizontal"
     android:layout_marginBottom="5dp"
     android:layout_width="match_parent"
@@ -13,6 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:id="@+id/parentLayout">
         <!--<TextView-->
         <!--android:id="@+id/tv_msgbox_subject"-->
@@ -40,44 +42,194 @@
                 android:id="@+id/rl_layout_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="3dp"
                 android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/image"
+                        android:layout_marginRight="3dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/unsolved"
+                        android:hint="Solved/Unsolved"
+                        android:layout_toRightOf="@+id/image"
+                        android:layout_toLeftOf="@+id/timeLimit"
+                        android:textSize="18dp"
+                        android:text="Unsolved"
+                        android:textColor="#FF0000"
+                        android:layout_marginBottom="4dp"/>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/timeLimit"
+                        android:textSize="18dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/urgent"
+                        android:textColor="@android:color/holo_green_dark"
+                        android:layout_marginBottom="4dp"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/urgent"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_not_urgent"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/datetime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_alignParentRight="true"
+                        android:hint="date"
+                        android:text=""/>
+                </RelativeLayout>
 
-
-                <TextView
-                    android:id="@+id/datetime"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginEnd="0dp"
-                    android:hint="date"
-                    android:text=""
-                    android:textAlignment="textEnd" />
+                    android:layout_marginRight="13dp"
+                    android:layout_marginLeft="13dp"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textcreator"
+                                android:layout_alignParentLeft="true"
+                                android:hint="Creator : "
+                                android:textSize="15sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/creator"
+                                android:layout_toRightOf="@+id/textcreator"
+                                android:hint="Creator : "
+                                android:textSize="15sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:linksClickable="true"
+                                android:textSize="15sp"
+                                android:id="@+id/textauthority"
+                                android:layout_below="@+id/textcreator"
+                                android:clickable="true"
+                                android:hint="Secy : "/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:linksClickable="true"
+                                android:textSize="15sp"
+                                android:id="@+id/authority"
+                                android:layout_toRightOf="@id/textauthority"
+                                android:layout_below="@+id/textcreator"
+                                android:clickable="true"
+                                android:hint="Concerned authority"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/subject"
+                                android:layout_marginTop="20dp"
+                                android:layout_below="@+id/authority"
+                                android:hint="Subject"
+                                android:textColor="#FF0000"
+                                android:textSize="18sp"/>
+                        </RelativeLayout>
 
 
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/receiver"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="1dp"
-                    android:text="Receiver"
-                    android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/subject"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="2dp"
-                    android:text=""
-                    android:hint="subject"
-                    android:textColor="@android:color/black"/>
+                    </RelativeLayout>
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="800dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/body"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="15dp"
+                                android:hint="Body"
+                                android:textSize="15sp"
+                                android:text=""
+                                android:textColor="@android:color/black" />
+                        </LinearLayout>
+                    </ScrollView>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/textlike"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:clickable="true"
+                            android:text="Likes :" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/textlike"
+                            android:id="@+id/likes"/>
+
+
+                        <TextView
+                            android:id="@+id/textcomment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toLeftOf="@+id/comment"
+                            android:clickable="true"
+                            android:text="Comments :" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:id="@+id/comment"/>
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
 
 
             </LinearLayout>
+
+
         </android.support.v7.widget.CardView>
     </LinearLayout>
 </LinearLayout>

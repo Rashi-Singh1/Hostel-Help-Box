@@ -10,10 +10,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AddThread"></activity>
+        <activity
+            android:name=".ComplaintSecy"
+            android:label="@string/title_activity_complaint_secy"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Complaint"
             android:label="@string/title_activity_complaint"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SearchContact" />
         <activity android:name=".View_Message_Conversation" />
         <activity

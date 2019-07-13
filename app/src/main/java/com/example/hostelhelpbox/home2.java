@@ -87,7 +87,6 @@ public class home2 extends AppCompatActivity
             Intent intent;
             intent = new Intent(getApplicationContext(),Complaint.class);
             startActivity(intent);
-            this.finish();
         } else if (id == R.id.nav_hostel_utilities) {
 
         } else if (id == R.id.nav_imp_contacts) {

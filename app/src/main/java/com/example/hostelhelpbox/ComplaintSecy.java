@@ -14,16 +14,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Complaint extends AppCompatActivity
+public class ComplaintSecy extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
     String theme;
-    SharedPreferenceConfig sharedPreferenceConfig;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_complaint);
+        setContentView(R.layout.activity_complaint_secy);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        sharedPreferenceConfig = new SharedPreferenceConfig(getApplicationContext());
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -33,7 +32,6 @@ public class Complaint extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.getMenu().getItem(0).setChecked(true);
         navigationView.setNavigationItemSelectedListener(this);
 
         theme = "cultural";
@@ -46,7 +44,6 @@ public class Complaint extends AppCompatActivity
                 startActivity(intent);
             }
         });
-
     }
 
     @Override
@@ -62,7 +59,7 @@ public class Complaint extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.complaint, menu);
+        getMenuInflater().inflate(R.menu.complaint_secy, menu);
         return true;
     }
 
@@ -86,7 +83,7 @@ public class Complaint extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        FragmentThread fragment = new FragmentThread();
+        FragmentThreadSecy fragment = new FragmentThreadSecy();
         Bundle bundle = new Bundle();
 
         if (id == R.id.nav_cultural) {
@@ -118,6 +115,5 @@ public class Complaint extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-
     }
 }
