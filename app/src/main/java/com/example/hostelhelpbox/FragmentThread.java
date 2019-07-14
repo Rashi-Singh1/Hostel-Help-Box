@@ -7,9 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FragmentThread extends Fragment {
 //    private ArrayList<Thread> list;
@@ -42,7 +45,6 @@ public class FragmentThread extends Fragment {
         viewSecretary.setLayoutManager(new LinearLayoutManager(getContext()));
         list = new ArrayList<>();
 
-        final SharedPreferenceConfig sharedPreferenceConfig = new SharedPreferenceConfig(getContext());
         Bundle bundle = this.getArguments();
         String theme = (String) bundle.getSerializable("theme");
         ref = FirebaseDatabase.getInstance().getReference("Threads/"+theme);
@@ -50,6 +52,7 @@ public class FragmentThread extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list.clear();
+                SharedPreferenceConfig sharedPreferenceConfig = new SharedPreferenceConfig(getContext());
                 for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
                     Thread p = dataSnapshot1.getValue(Thread.class);
@@ -58,9 +61,9 @@ public class FragmentThread extends Fragment {
                         list.add(p);
                     }
                 }
-                Toast.makeText(getContext(),"list size : "+Integer.toString((list.size())),Toast.LENGTH_SHORT).show();
                 if(list.size()!=0)
                 {
+                    Collections.reverse(list);
                     com.example.hostelhelpbox.AdapterThread Adapter = new com.example.hostelhelpbox.AdapterThread(getContext(),list);
                     viewSecretary.setAdapter(Adapter);
                     Adapter.notifyDataSetChanged();

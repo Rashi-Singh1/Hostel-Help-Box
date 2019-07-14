@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FragmentThreadSecy extends Fragment {
 //    private ArrayList<Thread> list;
@@ -43,23 +45,30 @@ public class FragmentThreadSecy extends Fragment {
         list = new ArrayList<>();
         Bundle bundle = this.getArguments();
         String theme = (String) bundle.getSerializable("theme");
-        final SharedPreferenceConfig sharedPreferenceConfig = new SharedPreferenceConfig(getContext());
         if(!theme.equals("my")) {
             ref = FirebaseDatabase.getInstance().getReference("Threads/" + theme);
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     list.clear();
+                    ArrayList<Thread> implist = new ArrayList<>();
+                    ArrayList<Thread> notSoImp = new ArrayList<>();
+                    SharedPreferenceConfig sharedPreferenceConfig = new SharedPreferenceConfig(getContext());
                     for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                     {
                         Thread p = dataSnapshot1.getValue(Thread.class);
                         if(sharedPreferenceConfig.readhostel().equals(p.getHostel()))
                         {
-                            list.add(p);
+                            if(p.isImp()) implist.add(p);
+                            else notSoImp.add(p);
                         }
                     }
-                    if(list.size()!=0)
+                    if((implist.size() + notSoImp.size())!=0)
                     {
+                        Collections.reverse(implist);
+                        Collections.reverse(notSoImp);
+                        for(int i = 0;i<implist.size();i++) list.add(implist.get(i));
+                        for(int i = 0;i<notSoImp.size();i++) list.add(notSoImp.get(i));
                         com.example.hostelhelpbox.AdapterThread Adapter = new com.example.hostelhelpbox.AdapterThread(getContext(),list);
                         viewSecretary.setAdapter(Adapter);
                         Adapter.notifyDataSetChanged();
@@ -75,7 +84,7 @@ public class FragmentThreadSecy extends Fragment {
             });
         }
         else{
-            ref = FirebaseDatabase.getInstance().getReference().child("Threads");
+//            ref = FirebaseDatabase.getInstance().getReference().child("Threads");
         }
 
         return RootView;

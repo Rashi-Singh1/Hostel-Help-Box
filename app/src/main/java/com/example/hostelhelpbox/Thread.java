@@ -7,23 +7,27 @@ public class Thread {
     private String secy;
     private String creator;
     private String theme;       //like maintenance
-    private ArrayList<User> likes;
+//    private ArrayList<User> likes;
     private String date;
     private String time;
     private boolean imp;
     private boolean solved;
     private boolean acknowledged;
     private double rating;
-    private ArrayList<Comment> comments;
+//    private ArrayList<Comment> comments;
+    private Integer likeCount;
+    private Integer commentCount;
     private String subject;
     private String body;
     private String hostel;
-
     private String expectedTime;
     private ArrayList<User> cc;
     //attachment
 
-    public Thread(){}
+    public Thread(){
+
+    }
+
     public Thread(String secy, String creator, String theme, String subject, String body, String date, String time,boolean imp,String hostel) {
         this.secy = secy;
         this.creator = creator;
@@ -35,12 +39,21 @@ public class Thread {
         this.imp = imp;
         this.solved = false;
         this.acknowledged = false;
-        this.likes = new ArrayList<>();
-        this.comments = new ArrayList<>();
         this.rating = 0;
         this.hostel = hostel;
+        this.likeCount = 0;
+        this.commentCount = 0;
+        this.expectedTime = "0";
     }
 
+
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
 
     public String getHostel() {
         return hostel;
@@ -106,14 +119,6 @@ public class Thread {
         this.theme = topic;
     }
 
-    public ArrayList<User> getLikes() {
-        return likes;
-    }
-
-    public void setLikes(ArrayList<User> likes) {
-        this.likes = likes;
-    }
-
     public boolean isImp() {
         return imp;
     }
@@ -146,14 +151,6 @@ public class Thread {
         this.rating = rating;
     }
 
-    public ArrayList<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(ArrayList<Comment> comments) {
-        this.comments = comments;
-    }
-
     public String getsubject() {
         return subject;
     }
@@ -176,5 +173,13 @@ public class Thread {
 
     public void setCc(ArrayList<User> cc) {
         this.cc = cc;
+    }
+
+    public Integer getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(Integer likeCount) {
+        this.likeCount = likeCount;
     }
 }

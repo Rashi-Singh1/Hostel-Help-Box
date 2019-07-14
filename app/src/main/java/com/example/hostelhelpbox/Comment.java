@@ -4,18 +4,20 @@ import java.util.ArrayList;
 
 public class Comment {
     private String key;
-    private ArrayList<User> likes;
+    private Integer likeCount;
     private String replyTo;
     private boolean pinned;
     private String subject;
-
+    private String body;
+    //how to tag people
     public Comment(){}
 
-    public Comment(String replyTo, boolean pinned, String subject, String body) {
+    public Comment(String replyTo, String subject, String body) {
         this.replyTo = replyTo;
-        this.pinned = pinned;
+        this.pinned = false;
         this.subject = subject;
         this.body = body;
+        this.likeCount = 0;
     }
 
     public String getKey() {
@@ -26,12 +28,12 @@ public class Comment {
         this.key = key;
     }
 
-    public ArrayList<User> getLikes() {
-        return likes;
+    public Integer getLikeCount() {
+        return likeCount;
     }
 
-    public void setLikes(ArrayList<User> likes) {
-        this.likes = likes;
+    public void setLikeCount(Integer likeCount) {
+        this.likeCount = likeCount;
     }
 
     public String getReplyTo() {
@@ -65,8 +67,6 @@ public class Comment {
     public void setBody(String body) {
         this.body = body;
     }
-
-    private String body;
-    //think about tagging facility
+//think about tagging facility
     //attachment
 }

@@ -117,7 +117,8 @@ public class FragmentDelSecy extends Fragment {
             removedItem.setUsertype(list.get(j).getUsertype());
             removedItem.setUsername(list.get(j).getUsername());
             removedPos = j;
-            ref.removeValue();
+//            ref.removeValue();
+            ref.child("usertype").setValue("normal");
             list.remove(j);
             Snackbar.make(viewHolder.itemView, removedItem.getUsername()+" deleted",Snackbar.LENGTH_LONG).setAction("UNDO", new MyUndoListener()).show();
 //  Adapter.notifyDataSetChanged();
@@ -168,8 +169,8 @@ public class FragmentDelSecy extends Fragment {
         @Override
         public void onClick(View v) {
             DatabaseReference ref;
-            ref = FirebaseDatabase.getInstance().getReference().child("Users");
-            ref.child(removedItem.getUsername()).setValue(removedItem);
+            ref = FirebaseDatabase.getInstance().getReference("Users/"+removedItem.getUsername());
+            ref.child("usertype").setValue("secy");
             list.add(removedPos,removedItem);
             Adapter.notifyDataSetChanged();
         }

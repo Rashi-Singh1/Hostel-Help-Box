@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_ack" android:title="Acknowledge this thread"/>
+    <item android:id="@+id/menu_expected_time" android:title="Add expected Date of solution"/>
+    <item android:id="@+id/menu_del" android:title="Delete this thread"/>
+    <item android:id="@+id/menu_urgent" android:title="Mark/Unmark as urgent"/>
+    <item android:id="@+id/menu_solved" android:title="Mark as Solved"/>
+    <item android:id="@+id/menu_rate" android:title="Rate the solution"/>
+    <item android:id="@+id/menu_share" android:title="Share this thread"/>
+</menu>
