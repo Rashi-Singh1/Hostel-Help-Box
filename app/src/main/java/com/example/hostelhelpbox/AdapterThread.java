@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hsalf.smilerating.SmileRating;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -76,17 +77,76 @@ public class AdapterThread extends RecyclerView.Adapter<AdapterThread.MyViewHold
         mydialog.show();
     }
 
+    public void rate(int j)
+    {
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.smily_rating_popup);
+        SmileRating smileRating = dialog.findViewById(R.id.smile_rating);
+        TextView txtclose;
+        txtclose = dialog.findViewById(R.id.txtclose);
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Threads/"+mytodos.get(j).gettheme()+"/"+mytodos.get(j).getKey()+"/rates/");
+        ref.child(sharedPreferenceConfig.readusername());
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue() == null) {
+                    // The child doesn't exist
+                }
+                else{
+                    Toast.makeText(context,"Your initial rating will be overwritten",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        final DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("Threads/"+mytodos.get(j).gettheme()+"/"+mytodos.get(j).getKey()+"/rates");
+        smileRating.setOnSmileySelectionListener(new SmileRating.OnSmileySelectionListener() {
+            @Override
+            public void onSmileySelected(int smiley, boolean reselected) {
+                switch (smiley)
+                {
+                    case SmileRating.BAD:
+                        ref2.child(sharedPreferenceConfig.readusername()).setValue(2);
+                        break;
+                    case SmileRating.GOOD:
+                        ref2.child(sharedPreferenceConfig.readusername()).setValue(4);
+                        break;
+                    case SmileRating.GREAT:
+                        ref2.child(sharedPreferenceConfig.readusername()).setValue(5);
+                        break;
+                    case SmileRating.OKAY:
+                        ref2.child(sharedPreferenceConfig.readusername()).setValue(3);
+                        break;
+                    case SmileRating.TERRIBLE:
+                        ref2.child(sharedPreferenceConfig.readusername()).setValue(1);
+                        break;
+                }
+            }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
+
     public void dodialogcomment(final int j)
     {
         final Dialog mydialog = new Dialog(context);
-        TextView txtclose;
         final EditText subject,body;
         ImageButton btncomment;
         mydialog.setContentView(R.layout.add_comment_popup);
-        txtclose = mydialog.findViewById(R.id.txtclose);
         subject = mydialog.findViewById(R.id.subject);
         body = mydialog.findViewById(R.id.body);
         btncomment = mydialog.findViewById(R.id.btncomment);
+        TextView txtclose;
+        txtclose = mydialog.findViewById(R.id.txtclose);
         txtclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,15 +159,19 @@ public class AdapterThread extends RecyclerView.Adapter<AdapterThread.MyViewHold
             public void onClick(View v) {
                 String getsubject = subject.getText().toString().trim();
                 String getbody = body.getText().toString().trim();
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Threads/"+mytodos.get(j).gettheme()+"/"+mytodos.get(j).getKey()+"/comments");
-                Comment comment = new Comment("",getsubject,getbody);
-                String key = ref.push().getKey();
-                comment.setKey(key);
-                ref.child(key).setValue(comment);
-                ref = FirebaseDatabase.getInstance().getReference("Threads/"+mytodos.get(j).gettheme()+"/"+mytodos.get(j).getKey());
-                ref.child("commentCount").setValue(mytodos.get(j).getCommentCount() + 1);
-                subject.setText("");
-                body.setText("");
+                if(getbody.isEmpty()){
+                    Toast.makeText(context,"Can not have empty body",Toast.LENGTH_SHORT).show();
+                }else {
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Threads/" + mytodos.get(j).gettheme() + "/" + mytodos.get(j).getKey() + "/comments");
+                    Comment comment = new Comment("", getsubject, getbody);
+                    String key = ref.push().getKey();
+                    comment.setKey(key);
+                    ref.child(key).setValue(comment);
+                    ref = FirebaseDatabase.getInstance().getReference("Threads/" + mytodos.get(j).gettheme() + "/" + mytodos.get(j).getKey());
+                    ref.child("commentCount").setValue(mytodos.get(j).getCommentCount() + 1);
+                    subject.setText("");
+                    body.setText("");
+                }
             }
         });
 
@@ -302,8 +366,11 @@ public class AdapterThread extends RecyclerView.Adapter<AdapterThread.MyViewHold
                                 ref.child("solved").setValue(true);
                                 break;
                             case R.id.menu_rate:
+                                rate(j);
                                 break;
                             case R.id.menu_share:
+                                break;
+                            case R.id.menu_change_authority:
                                 break;
                         }
                         return false;
