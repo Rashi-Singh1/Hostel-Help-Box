@@ -7,6 +7,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -34,6 +36,7 @@ import com.hsalf.smilerating.SmileRating;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Locale;
 
 import static android.support.constraint.Constraints.TAG;
@@ -136,23 +139,69 @@ public class AdapterThread extends RecyclerView.Adapter<AdapterThread.MyViewHold
         dialog.show();
     }
 
-    public void dodialogcomment(final int j)
+    public void dodialogcomment2(final int j)
     {
-        final Dialog mydialog = new Dialog(context);
-        final EditText subject,body;
-        ImageButton btncomment;
-        mydialog.setContentView(R.layout.add_comment_popup);
-        subject = mydialog.findViewById(R.id.subject);
-        body = mydialog.findViewById(R.id.body);
-        btncomment = mydialog.findViewById(R.id.btncomment);
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.view_comment_popup);
+
+        final ArrayList<Comment> list;
+
+        DatabaseReference ref;
+        final RecyclerView viewSecretary;
+        final TextView endpage;
+
+        endpage = dialog.findViewById(R.id.endpage);
+        viewSecretary = dialog.findViewById(R.id.viewSecretary);
+
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+        viewSecretary.setLayoutManager(mLayoutManager);
+
+        list = new ArrayList<>();
+
+        ref = FirebaseDatabase.getInstance().getReference("Threads/" + mytodos.get(j).gettheme() + "/" + mytodos.get(j).getKey()+"/comments/");
+        ref.addValueEventListener(new ValueEventListener() {       //later on change for updated value
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list.clear();
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    try{
+                        Comment p = dataSnapshot1.getValue(Comment.class);
+                        list.add(p);
+                    } catch (Throwable e) {
+                        Log.d("logginggg", "onCreate eror");
+                    }
+                }
+                if (list.size() != 0) {
+                    Collections.reverse(list);
+                    String address = "Threads/" + mytodos.get(j).gettheme() + "/" + mytodos.get(j).getKey()+"/comments/";
+                    com.example.hostelhelpbox.AdapterViewComment Adapter = new com.example.hostelhelpbox.AdapterViewComment(context, list,address);
+                    viewSecretary.setAdapter(Adapter);
+                    Adapter.notifyDataSetChanged();
+                } else endpage.setText("No comments");
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(context, "No Data", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         TextView txtclose;
-        txtclose = mydialog.findViewById(R.id.txtclose);
+        txtclose = dialog.findViewById(R.id.txtclose);
         txtclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mydialog.dismiss();
+                dialog.dismiss();
             }
         });
+
+        final EditText subject,body;
+        ImageButton btncomment;
+//        subject = mydialog.findViewById(R.id.subject);
+        subject = dialog.findViewById(R.id.textSubject);
+//        body = mydialog.findViewById(R.id.body);
+        body = dialog.findViewById(R.id.textSend);
+//        btncomment = mydialog.findViewById(R.id.btncomment);
+        btncomment = dialog.findViewById(R.id.send);
 
         btncomment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,7 +212,58 @@ public class AdapterThread extends RecyclerView.Adapter<AdapterThread.MyViewHold
                     Toast.makeText(context,"Can not have empty body",Toast.LENGTH_SHORT).show();
                 }else {
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Threads/" + mytodos.get(j).gettheme() + "/" + mytodos.get(j).getKey() + "/comments");
-                    Comment comment = new Comment("", getsubject, getbody);
+                    Comment comment = new Comment("", getsubject, getbody,sharedPreferenceConfig.readusername());
+                    String key = ref.push().getKey();
+                    comment.setKey(key);
+                    ref.child(key).setValue(comment);
+                    ref = FirebaseDatabase.getInstance().getReference("Threads/" + mytodos.get(j).gettheme() + "/" + mytodos.get(j).getKey());
+                    ref.child("commentCount").setValue(mytodos.get(j).getCommentCount() + 1);
+                    subject.setText("");
+                    body.setText("");
+                }
+            }
+        });
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+//
+//        setOnClick(btnNewContact, btnNewContact);
+//
+//        return dialog;
+    }
+
+    public void dodialogcomment(final int j)
+    {
+        final Dialog mydialog = new Dialog(context);
+
+        mydialog.setContentView(R.layout.add_comment_popup);
+        TextView txtclose;
+        txtclose = mydialog.findViewById(R.id.txtclose);
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mydialog.dismiss();
+            }
+        });
+        final EditText subject,body;
+        ImageButton btncomment;
+//        subject = mydialog.findViewById(R.id.subject);
+        subject = mydialog.findViewById(R.id.textSubject);
+//        body = mydialog.findViewById(R.id.body);
+        body = mydialog.findViewById(R.id.textSend);
+//        btncomment = mydialog.findViewById(R.id.btncomment);
+        btncomment = mydialog.findViewById(R.id.send);
+
+        btncomment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getsubject = subject.getText().toString().trim();
+                String getbody = body.getText().toString().trim();
+                if(getbody.isEmpty()){
+                    Toast.makeText(context,"Can not have empty body",Toast.LENGTH_SHORT).show();
+                }else {
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Threads/" + mytodos.get(j).gettheme() + "/" + mytodos.get(j).getKey() + "/comments");
+                    Comment comment = new Comment("", getsubject, getbody,sharedPreferenceConfig.readusername());
                     String key = ref.push().getKey();
                     comment.setKey(key);
                     ref.child(key).setValue(comment);
@@ -198,7 +298,8 @@ public class AdapterThread extends RecyclerView.Adapter<AdapterThread.MyViewHold
         viewHolder.textcomment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dodialogcomment(j);
+//                dodialogcomment(j);
+                dodialogcomment2(j);
             }
         });
 

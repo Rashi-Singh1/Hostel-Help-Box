@@ -6,18 +6,29 @@ public class Comment {
     private String key;
     private Integer likeCount;
     private String replyTo;
+    private String username;
     private boolean pinned;
     private String subject;
     private String body;
     //how to tag people
     public Comment(){}
 
-    public Comment(String replyTo, String subject, String body) {
+    public Comment(String replyTo, String subject, String body,String username) {
         this.replyTo = replyTo;
         this.pinned = false;
         this.subject = subject;
         this.body = body;
         this.likeCount = 0;
+        this.username = username;
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getKey() {
