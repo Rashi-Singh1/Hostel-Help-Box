@@ -2,38 +2,52 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
+    <!--<item android:title="My Section">-->
+        <!--<menu>-->
+            <!--<group android:checkableBehavior="single">-->
+                <!--<item-->
+                    <!--android:id="@+id/nav_my"-->
+                    <!--android:icon="@drawable/ic_menu_slideshow"-->
+                    <!--android:title="Received Suggestions" />-->
+                <!--<item-->
+                    <!--android:id="@+id/nav_my_created"-->
+                    <!--android:icon="@drawable/ic_menu_slideshow"-->
+                    <!--android:title="Uploaded Suggestions" />-->
+            <!--</group>-->
+        <!--</menu>-->
+    <!--</item>-->
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_my"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="My Complaints/Suggestions" />
-        <item
-            android:id="@+id/nav_cultural"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Cultural" />
-        <item
-            android:id="@+id/nav_maintenance"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Maintenance" />
-        <item
-            android:id="@+id/nav_mess"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Mess/Canteen/Juice Center" />
-        <item
-            android:id="@+id/nav_sports"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Sports" />
+    <item android:title="Hostel">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_cultural"
+                    android:icon="@drawable/ic_menu_slideshow"
+                    android:title="Cultural" />
+                <item
+                    android:id="@+id/nav_maintenance"
+                    android:icon="@drawable/ic_menu_camera"
+                    android:title="Maintenance" />
+                <item
+                    android:id="@+id/nav_mess"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="Mess/Canteen/Juice Center" />
+                <item
+                    android:id="@+id/nav_sports"
+                    android:icon="@drawable/ic_menu_slideshow"
+                    android:title="Sports" />
 
-        <item
-            android:id="@+id/nav_technical"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Technical" />
-        <item
-            android:id="@+id/nav_welfare"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Welfare" />
-    </group>
+                <item
+                    android:id="@+id/nav_technical"
+                    android:icon="@drawable/ic_menu_manage"
+                    android:title="Technical" />
+                <item
+                    android:id="@+id/nav_welfare"
+                    android:icon="@drawable/ic_menu_slideshow"
+                    android:title="Welfare" />
+            </group>
+        </menu>
+    </item>
 
     <!--<item android:title="Communicate">-->
         <!--<menu>-->

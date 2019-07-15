@@ -47,4 +47,5 @@
     <string name="title_activity_secy_home2">SecyHome2</string>
     <string name="title_activity_complaint">Complaint</string>
     <string name="title_activity_complaint_secy">ComplaintSecy</string>
+    <string name="title_activity_hostel_utilities">HostelUtilities</string>
 </resources>

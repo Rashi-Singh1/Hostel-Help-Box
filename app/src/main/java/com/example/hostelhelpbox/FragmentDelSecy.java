@@ -1,5 +1,6 @@
 package com.example.hostelhelpbox;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -30,6 +31,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class FragmentDelSecy extends Fragment {
+    Context context;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
     private ArrayList<User> list;
     private com.example.hostelhelpbox.Adapter Adapter;
     User removedItem;
@@ -46,52 +54,48 @@ public class FragmentDelSecy extends Fragment {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         View RootView = inflater.inflate(R.layout.fragment_del_secy, container, false);
 //        final ArrayList<User> list;
-        DatabaseReference ref;
-        final RecyclerView viewSecretary;
-        final TextView title, endpage;
+        if(context!=null) {
+            DatabaseReference ref;
+            final RecyclerView viewSecretary;
+            final TextView title, endpage;
 
-        title = RootView.findViewById(R.id.title);
-        endpage = RootView.findViewById(R.id.endpage);
-        viewSecretary = RootView.findViewById(R.id.viewSecretary);
-        viewSecretary.setLayoutManager(new LinearLayoutManager(getContext()));
-        list = new ArrayList<>();
-//        Adapter Adapter = new com.example.hostelhelpbox.Adapter(getContext(),list);
-        ref = FirebaseDatabase.getInstance().getReference().child("Users");
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int index = 0;
-                for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
-                {
-                    User p = dataSnapshot1.getValue(User.class);
-                    if(p!=null && p.getUsertype().equals("secy"))
-                    {
-                        if(list.size() > 0 && list.get(index).getUsername().equals(p.getUsername()))
-                        {
-                            index++;
+            title = RootView.findViewById(R.id.title);
+            endpage = RootView.findViewById(R.id.endpage);
+            viewSecretary = RootView.findViewById(R.id.viewSecretary);
+            viewSecretary.setLayoutManager(new LinearLayoutManager(context));
+            list = new ArrayList<>();
+//        Adapter Adapter = new com.example.hostelhelpbox.Adapter(context,list);
+            ref = FirebaseDatabase.getInstance().getReference().child("Users");
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    int index = 0;
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        User p = dataSnapshot1.getValue(User.class);
+                        if (p != null && p.getUsertype().equals("secy")) {
+                            if (list.size() > 0 && list.get(index).getUsername().equals(p.getUsername())) {
+                                index++;
+                            } else list.add(p);
                         }
-                        else list.add(p);
                     }
-                }
-                if(list.size()!=0)
-                {
-                    Adapter = new com.example.hostelhelpbox.Adapter(getContext(),list);
-                    new ItemTouchHelper(itemTouchHelperCallBack).attachToRecyclerView(viewSecretary);
+                    if (list.size() != 0) {
+                        Adapter = new com.example.hostelhelpbox.Adapter(context, list);
+                        new ItemTouchHelper(itemTouchHelperCallBack).attachToRecyclerView(viewSecretary);
 
-//                  Adapter = new Adapter(getContext(),list);
-                    viewSecretary.setAdapter(Adapter);
-                    Adapter.notifyDataSetChanged();
-                }
-                else endpage.setText("No secretaries added");
+//                  Adapter = new Adapter(context,list);
+                        viewSecretary.setAdapter(Adapter);
+                        Adapter.notifyDataSetChanged();
+                    } else endpage.setText("No secretaries added");
 
 //                val itemTouchHelperCallBack = User :ItemTouchHelper.SimpleCallback
-            }
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getContext(),"No Data",Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(context, "No Data", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
         return RootView;
     }
 
@@ -109,8 +113,8 @@ public class FragmentDelSecy extends Fragment {
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
             int j = viewHolder.getAdapterPosition();
-//            Toast.makeText(getContext(),"index j : "+ Integer.toString(j),Toast.LENGTH_SHORT).show();
-//            Toast.makeText(getContext(),"index getpositionnnn : "+ Integer.toString(viewHolder.getAdapterPosition()),Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context,"index j : "+ Integer.toString(j),Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context,"index getpositionnnn : "+ Integer.toString(viewHolder.getAdapterPosition()),Toast.LENGTH_SHORT).show();
             DatabaseReference ref;
             ref = FirebaseDatabase.getInstance().getReference("Users/"+list.get(j).getUsername());
             removedItem = new User(list.get(j).getFullName(),list.get(j).getEmail(),list.get(j).getPasswd(),list.get(j).getHostel(),list.get(j).getSecyOf());
@@ -119,7 +123,9 @@ public class FragmentDelSecy extends Fragment {
             removedPos = j;
 //            ref.removeValue();
             ref.child("usertype").setValue("normal");
-            list.remove(j);
+            if(j < list.size()) {
+                list.remove(j);
+            }
             Snackbar.make(viewHolder.itemView, removedItem.getUsername()+" deleted",Snackbar.LENGTH_LONG).setAction("UNDO", new MyUndoListener()).show();
 //  Adapter.notifyDataSetChanged();
         }
@@ -136,7 +142,7 @@ public class FragmentDelSecy extends Fragment {
                 int redwood = Color.rgb(164,90,82);
                 int desire = Color.rgb(234,60,83);
                 int salmon = Color.rgb(250,128,114);
-                Drawable trash = ContextCompat.getDrawable(getContext(),R.drawable.ic_delete_black_24dp);
+                Drawable trash = ContextCompat.getDrawable(context,R.drawable.ic_delete_black_24dp);
 
                 int iconMargin = (itemView.getHeight()-trash.getIntrinsicHeight())/2;
 //                int iconMargin = (itemView.getHeight()-trash.getIntrinsicHeight())/2;

@@ -4,13 +4,18 @@
     package="com.example.hostelhelpbox">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddThread"></activity>
+        <activity
+            android:name=".HostelUtilities"
+            android:label="@string/title_activity_hostel_utilities"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".AddThread" />
         <activity
             android:name=".ComplaintSecy"
             android:label="@string/title_activity_complaint_secy"

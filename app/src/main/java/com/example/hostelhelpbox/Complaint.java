@@ -93,6 +93,10 @@ public class Complaint extends AppCompatActivity
             bundle.putSerializable("theme", "cultural");
             theme = "cultural";
 
+        } else if (id == R.id.nav_my_created) {
+            bundle.putSerializable("theme", "my_created");
+            theme = "my_created";
+
         } else if (id == R.id.nav_maintenance) {
             bundle.putSerializable("theme", "maintenance");
             theme = "maintenance";

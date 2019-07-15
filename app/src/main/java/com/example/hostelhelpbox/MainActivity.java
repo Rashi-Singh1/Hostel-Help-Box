@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        App app = (App) getApplicationContext();
+        app.setMcontext(this.getApplicationContext());
 
         sharedPreferenceConfig = new SharedPreferenceConfig(getApplicationContext());
 

@@ -1,6 +1,7 @@
 package com.example.hostelhelpbox;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,61 +32,70 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 
 public class FragmentViewMessage extends Fragment {
     public FragmentViewMessage() {
 
     }
+    Context context;
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View RootView = inflater.inflate(R.layout.activity_view_message, container, false);
-        final ArrayList<message> list;
-        DatabaseReference ref;
-        final RecyclerView viewSecretary;
-        final TextView endpage;
-        final FloatingActionButton btnNewContact;
+        if(context!=null) {
+            final ArrayList<message> list;
+            DatabaseReference ref;
+            final RecyclerView viewSecretary;
+            final TextView endpage;
+            final FloatingActionButton btnNewContact;
 
-        endpage = RootView.findViewById(R.id.endpage);
-        viewSecretary = RootView.findViewById(R.id.viewSecretary);
-        btnNewContact = RootView.findViewById(R.id.btnNewContact);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+            endpage = RootView.findViewById(R.id.endpage);
+            viewSecretary = RootView.findViewById(R.id.viewSecretary);
+            btnNewContact = RootView.findViewById(R.id.btnNewContact);
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
 //        mLayoutManager.setReverseLayout(true);
 //        mLayoutManager.setStackFromEnd(true);
-//        viewSecretary.setLayoutManager(new LinearLayoutManager(getContext()));
-        viewSecretary.setLayoutManager(mLayoutManager);
+//        viewSecretary.setLayoutManager(new LinearLayoutManager(context));
+            viewSecretary.setLayoutManager(mLayoutManager);
 
-        list = new ArrayList<>();
+            list = new ArrayList<>();
 
-        ref = FirebaseDatabase.getInstance().getReference("Users/" + UserInfo.username + "/messages");
-        ref.addValueEventListener(new ValueEventListener() {       //later on change for updated value
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list.clear();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    try{
-                        message account  = dataSnapshot1.getChildren().iterator().next().getValue(message.class);
-                        list.add(account);
+            ref = FirebaseDatabase.getInstance().getReference("Users/" + UserInfo.username + "/messages");
+            ref.addValueEventListener(new ValueEventListener() {       //later on change for updated value
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    list.clear();
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        try {
+                            message account = dataSnapshot1.getChildren().iterator().next().getValue(message.class);
+                            list.add(account);
 
-                    } catch (Throwable e) {
-                        Log.d("logginggg", "onCreate eror");
+                        } catch (Throwable e) {
+                            Log.d("logginggg", "onCreate eror");
+                        }
                     }
+                    if (list.size() != 0) {
+                        com.example.hostelhelpbox.AdapterViewMessage Adapter = new com.example.hostelhelpbox.AdapterViewMessage(context, list);
+                        viewSecretary.setAdapter(Adapter);
+                        Adapter.notifyDataSetChanged();
+                    } else endpage.setText("No messages");
                 }
-                if (list.size() != 0) {
-                    com.example.hostelhelpbox.AdapterViewMessage Adapter = new com.example.hostelhelpbox.AdapterViewMessage(getContext(), list);
-                    viewSecretary.setAdapter(Adapter);
-                    Adapter.notifyDataSetChanged();
-                } else endpage.setText("No messages");
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getContext(), "No Data", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        setOnClick(btnNewContact, btnNewContact);
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(context, "No Data", Toast.LENGTH_SHORT).show();
+                }
+            });
 
+            setOnClick(btnNewContact, btnNewContact);
+        }
         return RootView;
     }
 
@@ -95,7 +105,7 @@ public class FragmentViewMessage extends Fragment {
             public void onClick(View v) {
                 if (v == btnNewContact) {
                     Intent intent;
-                    intent = new Intent(getContext(), SearchContact.class);
+                    intent = new Intent(context, SearchContact.class);
                     startActivity(intent);
 //                    Fragment someFragment = new FragmentSearchContact();
 //                    FragmentTransaction transaction = getFragmentManager().beginTransaction();

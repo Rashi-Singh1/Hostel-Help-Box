@@ -1,6 +1,7 @@
 package com.example.hostelhelpbox;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,6 +25,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 //public class FragmentAddSecy extends Fragment implements View.OnClickListener {
 public class FragmentAddSecy extends Fragment {
+    Context context;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
+
     public static boolean isAlphaNumeric(String s) {
         return s != null && s.matches("^[a-zA-Z0-9]*$");
     }
@@ -32,38 +41,41 @@ public class FragmentAddSecy extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
-        Toast.makeText(getContext(), "Add Decy", Toast.LENGTH_SHORT).show();
         View RootView = inflater.inflate(R.layout.fragment_add_secy, container, false);
 
-        SharedPreferenceConfig sharedPreferenceConfig;
+        if(context!=null) {
+//            Toast.makeText(context, "Add Decy", Toast.LENGTH_SHORT).show();
 
-        Button Submit;
-        EditText Name;
-        EditText Email;
-        EditText Password;
-        Spinner Hosteldrop;
-        Spinner DesignDrop;
+            SharedPreferenceConfig sharedPreferenceConfig;
 
-        sharedPreferenceConfig = new SharedPreferenceConfig(getContext());
+            Button Submit;
+            EditText Name;
+            EditText Email;
+            EditText Password;
+            Spinner Hosteldrop;
+            Spinner DesignDrop;
+
+            sharedPreferenceConfig = new SharedPreferenceConfig(context);
 
 //        firebaseAuth = FirebaseAuth.getInstance();
-        Submit = (Button) RootView.findViewById(R.id.submit);
-        Name = (EditText) RootView.findViewById(R.id.name);
-        Email = (EditText) RootView.findViewById(R.id.email);
-        Password = (EditText) RootView.findViewById(R.id.passw);
-        Hosteldrop = (Spinner) RootView.findViewById(R.id.hostel);
-        DesignDrop = (Spinner) RootView.findViewById(R.id.designation);
+            Submit = (Button) RootView.findViewById(R.id.submit);
+            Name = (EditText) RootView.findViewById(R.id.name);
+            Email = (EditText) RootView.findViewById(R.id.email);
+            Password = (EditText) RootView.findViewById(R.id.passw);
+            Hosteldrop = (Spinner) RootView.findViewById(R.id.hostel);
+            DesignDrop = (Spinner) RootView.findViewById(R.id.designation);
 
 //        //putting values in the dropdown list
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.hostelNames));
-        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Hosteldrop.setAdapter(myAdapter);
+            ArrayAdapter<String> myAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.hostelNames));
+            myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            Hosteldrop.setAdapter(myAdapter);
 
-        ArrayAdapter<String> myAdapter2 = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.secyNames));
-        myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        DesignDrop.setAdapter(myAdapter2);
+            ArrayAdapter<String> myAdapter2 = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.secyNames));
+            myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            DesignDrop.setAdapter(myAdapter2);
 
-        setOnClick(Submit,sharedPreferenceConfig,Name,Email,Password,Hosteldrop, DesignDrop,Submit);
+            setOnClick(Submit, sharedPreferenceConfig, Name, Email, Password, Hosteldrop, DesignDrop, Submit);
+        }
         return RootView;
 //        return inflater.inflate(R.layout.fragment_add_secy, container, false);
     }
@@ -75,41 +87,41 @@ public class FragmentAddSecy extends Fragment {
         String getPassw = Password.getText().toString().trim();
         DatabaseReference ref;
         ProgressDialog progress;
-        progress = new ProgressDialog(getContext());
+        progress = new ProgressDialog(context);
         if (TextUtils.isEmpty(getName)) {
-            Toast.makeText(getContext(), "Please enter your name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Please enter your name", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (TextUtils.isEmpty(getEMail)) {
-            Toast.makeText(getContext(), "Please enter your Email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Please enter your Email", Toast.LENGTH_SHORT).show();
             return;
         } else {
             if (!getEMail.endsWith("@iitg.ac.in")) {
-                Toast.makeText(getContext(), "Only IITG members, use IITG email", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Only IITG members, use IITG email", Toast.LENGTH_LONG).show();
                 return;
             }
 
         }
 
         if (getEMail.lastIndexOf('@') != getEMail.indexOf('@')) {
-            Toast.makeText(getContext(), "Please enter valid Email Id", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Please enter valid Email Id", Toast.LENGTH_LONG).show();
             return;
         }
 
         UserName = getEMail.substring(0, getEMail.lastIndexOf('@'));
         if (!isAlphaNumeric(UserName)) {
-            Toast.makeText(getContext(), "Please enter valid Email Id", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Please enter valid Email Id", Toast.LENGTH_LONG).show();
             return;
         }
 
         if (Hostel.equals("Select Hostel")) {
-            Toast.makeText(getContext(), "Please choose your hostel", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Please choose your hostel", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (TextUtils.isEmpty(getPassw)) {
-            Toast.makeText(getContext(), "Please enter your Password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Please enter your Password", Toast.LENGTH_SHORT).show();
             return;
         }
         progress.setMessage("Registering New Secy ...");
@@ -139,7 +151,7 @@ public class FragmentAddSecy extends Fragment {
                     RegisterUser(sharedPreferenceConfig,name,Email,Password,Hostel,Designation);
                     Hosteldrop.setSelection(0);
                     DesignDrop.setSelection(0);
-                    Toast.makeText(getContext(),"New Secy Registered",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"New Secy Registered",Toast.LENGTH_SHORT).show();
                 }
 
             }

@@ -1,5 +1,6 @@
 package com.example.hostelhelpbox;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class FragmentViewSecy extends Fragment {
 //    private ArrayList<User> list;
@@ -28,51 +30,56 @@ public class FragmentViewSecy extends Fragment {
     {
 
     }
+    Context context;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         View RootView = inflater.inflate(R.layout.fragment_view_secy, container, false);
-        final ArrayList<User> list;
-        DatabaseReference ref;
-        final RecyclerView viewSecretary;
-        final TextView title, endpage;
+        if(context!=null) {
+            final ArrayList<User> list;
+            DatabaseReference ref;
+            final RecyclerView viewSecretary;
+            final TextView title, endpage;
 
-        title = RootView.findViewById(R.id.title);
-        endpage = RootView.findViewById(R.id.endpage);
-        viewSecretary = RootView.findViewById(R.id.viewSecretary);
-        viewSecretary.setLayoutManager(new LinearLayoutManager(getContext()));
-        list = new ArrayList<>();
+            title = RootView.findViewById(R.id.title);
+            endpage = RootView.findViewById(R.id.endpage);
+            viewSecretary = RootView.findViewById(R.id.viewSecretary);
+            viewSecretary.setLayoutManager(new LinearLayoutManager(context));
+            list = new ArrayList<>();
 
-//        Adapter Adapter = new com.example.hostelhelpbox.Adapter(getContext(),list);
-        ref = FirebaseDatabase.getInstance().getReference().child("Users");
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
-                {
-                    User p = dataSnapshot1.getValue(User.class);
-                    if(p!=null && p.getUsertype().equals("secy"))
-                    {
-                        list.add(p);
+//        Adapter Adapter = new com.example.hostelhelpbox.Adapter(context,list);
+            ref = FirebaseDatabase.getInstance().getReference().child("Users");
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        User p = dataSnapshot1.getValue(User.class);
+                        if (p != null && p.getUsertype().equals("secy")) {
+                            list.add(p);
+                        }
                     }
-                }
-                if(list.size()!=0)
-                {
-                    com.example.hostelhelpbox.Adapter Adapter = new com.example.hostelhelpbox.Adapter(getContext(),list);
+                    if (list.size() != 0) {
+                        com.example.hostelhelpbox.Adapter Adapter = new com.example.hostelhelpbox.Adapter(context, list);
 
-//                  Adapter = new Adapter(getContext(),list);
-                    viewSecretary.setAdapter(Adapter);
-                    Adapter.notifyDataSetChanged();
+//                  Adapter = new Adapter(context,list);
+                        viewSecretary.setAdapter(Adapter);
+                        Adapter.notifyDataSetChanged();
+                    } else endpage.setText("No secretaries added");
                 }
-                else endpage.setText("No secretaries added");
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getContext(),"No Data",Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(context, "No Data", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
         return RootView;
     }
 

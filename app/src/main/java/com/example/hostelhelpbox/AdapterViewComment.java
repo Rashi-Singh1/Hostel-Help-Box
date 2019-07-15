@@ -37,6 +37,7 @@ public class AdapterViewComment extends RecyclerView.Adapter<AdapterViewComment.
         context = c;
         mytodos = p;
         Address = address;
+        sharedPreferenceConfig = new SharedPreferenceConfig(context);
     }
     @NonNull
     @Override
@@ -118,7 +119,7 @@ public class AdapterViewComment extends RecyclerView.Adapter<AdapterViewComment.
     }
 
     public void onBindViewHolder(@NonNull final MyViewHolder viewHolder, int i) {
-        sharedPreferenceConfig = new SharedPreferenceConfig(context);
+//        sharedPreferenceConfig = new SharedPreferenceConfig(context);
         viewHolder.subject.setText(mytodos.get(i).getSubject());
         viewHolder.body.setText(mytodos.get(i).getBody());
         viewHolder.like.setText(Integer.toString(mytodos.get(i).getLikeCount()));

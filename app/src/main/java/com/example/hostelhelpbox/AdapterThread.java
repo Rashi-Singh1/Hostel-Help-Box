@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -51,6 +52,7 @@ public class AdapterThread extends RecyclerView.Adapter<AdapterThread.MyViewHold
     {
         context = c;
         mytodos = p;
+        sharedPreferenceConfig = new SharedPreferenceConfig(context);
     }
 
     @NonNull
@@ -157,22 +159,32 @@ public class AdapterThread extends RecyclerView.Adapter<AdapterThread.MyViewHold
         viewSecretary.setLayoutManager(mLayoutManager);
 
         list = new ArrayList<>();
+        final ArrayList<Comment> starred = new ArrayList<>();
+        final ArrayList<Comment> notstarred = new ArrayList<>();
 
         ref = FirebaseDatabase.getInstance().getReference("Threads/" + mytodos.get(j).gettheme() + "/" + mytodos.get(j).getKey()+"/comments/");
         ref.addValueEventListener(new ValueEventListener() {       //later on change for updated value
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list.clear();
+                starred.clear();
+                notstarred.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     try{
                         Comment p = dataSnapshot1.getValue(Comment.class);
-                        list.add(p);
+                        if(p!=null && p.isPinned()) starred.add(p);
+                        else notstarred.add(p);
+//                        list.add(p);
                     } catch (Throwable e) {
                         Log.d("logginggg", "onCreate eror");
                     }
                 }
-                if (list.size() != 0) {
-                    Collections.reverse(list);
+                if ((starred.size() + notstarred.size()) != 0) {
+                    Collections.reverse(starred);
+                    Collections.reverse(notstarred);
+                    list.addAll(starred);
+                    list.addAll(notstarred);
+//                    Collections.reverse(list);
                     String address = "Threads/" + mytodos.get(j).gettheme() + "/" + mytodos.get(j).getKey()+"/comments/";
                     com.example.hostelhelpbox.AdapterViewComment Adapter = new com.example.hostelhelpbox.AdapterViewComment(context, list,address);
                     viewSecretary.setAdapter(Adapter);
@@ -361,7 +373,6 @@ public class AdapterThread extends RecyclerView.Adapter<AdapterThread.MyViewHold
             @Override
             public void onClick(View v) {
                 DatabaseReference ref;
-                final SharedPreferenceConfig sharedPreferenceConfig = new SharedPreferenceConfig(context);
                 ref = FirebaseDatabase.getInstance().getReference("Threads/"+mytodos.get(j).gettheme()+"/"+mytodos.get(j).getKey()+"/likes");
                 ref.child(sharedPreferenceConfig.readusername());
                 ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -452,8 +463,12 @@ public class AdapterThread extends RecyclerView.Adapter<AdapterThread.MyViewHold
                                 break;
                             case R.id.menu_del:
                                 DatabaseReference ref2;
-                                ref2 = FirebaseDatabase.getInstance().getReference("Threads/"+mytodos.get(j).gettheme()+"/"+mytodos.get(j).getKey());
-                                ref2.removeValue();
+                                if(j < mytodos.size()) {
+                                    ref2 = FirebaseDatabase.getInstance().getReference("Threads/" + mytodos.get(j).gettheme() + "/" + mytodos.get(j).getKey());
+                                    ref2.removeValue();
+                                    mytodos.remove(j);
+                                    notifyDataSetChanged();
+                                }
                                 break;
                             case R.id.menu_urgent:
                                 ref = FirebaseDatabase.getInstance().getReference("Threads/"+mytodos.get(j).gettheme()+"/"+mytodos.get(j).getKey());

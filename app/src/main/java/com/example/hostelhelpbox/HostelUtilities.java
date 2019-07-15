@@ -1,6 +1,5 @@
 package com.example.hostelhelpbox;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,16 +13,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ComplaintSecy extends AppCompatActivity
+public class HostelUtilities extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    String theme;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_complaint_secy);
+        setContentView(R.layout.activity_hostel_utilities);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -33,17 +40,6 @@ public class ComplaintSecy extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        theme = "cultural";
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),AddThread.class);
-                intent.putExtra("theme", theme);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -59,7 +55,7 @@ public class ComplaintSecy extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.complaint_secy, menu);
+        getMenuInflater().inflate(R.menu.hostel_utilities, menu);
         return true;
     }
 
@@ -83,36 +79,22 @@ public class ComplaintSecy extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        FragmentThread fragment = new FragmentThread();
-        Bundle bundle = new Bundle();
 
-        if (id == R.id.nav_cultural) {
-            bundle.putSerializable("theme", "cultural");
-            theme = "cultural";
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_maintenance) {
-            bundle.putSerializable("theme", "maintenance");
-            theme = "maintenance";
+        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_mess) {
-            bundle.putSerializable("theme", "mess");
-            theme = "mess";
+        } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_sports) {
-            bundle.putSerializable("theme", "sports");
-            theme = "sports";
+        } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_technical) {
-            bundle.putSerializable("theme", "technical");
-            theme = "technical";
+        } else if (id == R.id.nav_send) {
 
-        } else if (id == R.id.nav_welfare) {
-            bundle.putSerializable("theme", "welfare");
-            theme = "welfare";
         }
-        fragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.screen_area, fragment).commit();
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
