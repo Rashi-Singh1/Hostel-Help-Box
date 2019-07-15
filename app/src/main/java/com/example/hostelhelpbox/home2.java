@@ -88,6 +88,9 @@ public class home2 extends AppCompatActivity
             intent = new Intent(getApplicationContext(),Complaint.class);
             startActivity(intent);
         } else if (id == R.id.nav_hostel_utilities) {
+            Intent intent;
+            intent = new Intent(getApplicationContext(),HostelUtilities.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_imp_contacts) {
 
@@ -104,6 +107,9 @@ public class home2 extends AppCompatActivity
 
         } else if (id == R.id.nav_message) {
             getSupportFragmentManager().beginTransaction().replace(R.id.screen_area, new FragmentViewMessage()).commit();
+        }
+        else if (id == R.id.nav_imp_notice) {
+//            getSupportFragmentManager().beginTransaction().replace(R.id.screen_area, new FragmentViewMessage()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
