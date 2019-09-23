@@ -20,6 +20,10 @@
             android:icon="@mipmap/logout"
             android:title="Important Contacts" />
 
+        <item android:id="@+id/nav_imp_notice"
+            android:icon="@mipmap/logout"
+            android:title="Notices" />
+
         <item android:id="@+id/nav_logout"
             android:icon="@mipmap/logout"
             android:title="Logout" />

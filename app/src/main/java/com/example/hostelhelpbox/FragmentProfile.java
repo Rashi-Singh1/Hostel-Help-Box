@@ -25,19 +25,20 @@ public class FragmentProfile extends Fragment {
 //        Toast.makeText(context,"My profile",Toast.LENGTH_SHORT).show();
         View RootView = inflater.inflate(R.layout.fragment_profile, container, false);
         if (context!=null) {
+            SharedPreferenceConfig sharedPreferenceConfig = new SharedPreferenceConfig(context);
             TextView username = RootView.findViewById(R.id.username);
             TextView FullName = (TextView) RootView.findViewById(R.id.fullname);
             TextView Email = (TextView) RootView.findViewById(R.id.email);
             TextView Usertype = (TextView) RootView.findViewById(R.id.usertype);
             TextView Hostel = (TextView) RootView.findViewById(R.id.hostel);
 
-            if (UserInfo.username == null) return RootView;
+//            if (UserInfo.username == null) return RootView;
 //        Toast.makeText(context,"Welcome2 "+UserInfo.username,Toast.LENGTH_SHORT).show();
-            username.setText(UserInfo.username);
-            FullName.setText(UserInfo.fullname);
-            Email.setText(UserInfo.email);
-            Hostel.setText(UserInfo.hostel);
-            if (!UserInfo.usertype.equals("normal")) Usertype.setText(UserInfo.usertype);
+            username.setText(sharedPreferenceConfig.readusername());
+            FullName.setText(sharedPreferenceConfig.readfullName());
+            Email.setText(sharedPreferenceConfig.reademail());
+            Hostel.setText(sharedPreferenceConfig.readhostel());
+            if (!sharedPreferenceConfig.readusertype().equals("normal")) Usertype.setText(sharedPreferenceConfig.readusertype());
         }
         return RootView;
     }
